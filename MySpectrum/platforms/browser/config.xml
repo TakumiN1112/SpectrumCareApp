@@ -7,6 +7,5 @@
     <author email="support@phonegap.com" href="http://phonegap.com">
         PhoneGap Team
     </author>
-    <content src="MySpectrum.css" />
-    <access origin="*" />
+    <content src="https://fonts.googleapis.com/css?family=Comfortaa" />
 </widget>
