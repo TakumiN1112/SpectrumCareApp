@@ -15,7 +15,8 @@
     <content src="MySpectrum.css" />
     <content src="TestPDF.pdf" />
     <content src="Menu.png" />
-    <content src="pdfViewer.js" />
     <content src="Cordova.js" />
     <content src="https://fonts.googleapis.com/css?family=Comfortaa" />
+    <content src="form.js" />
+    <content src="pdf.js" />
 </widget>

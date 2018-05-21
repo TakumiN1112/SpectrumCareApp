@@ -6,15 +6,502 @@
         <link rel = "stylesheet" type = "text/css" href = "MySpectrum.css" />
         <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
         <title>MySpectrum</title>
+
     </head>
     <body>
-      <form action="http://formspree.io/harry.richard.johnson@gmail.com" method="post">
-          <input type="text" name="name">
-          <input type="email" name="_replyto">
-          <input type="submit" value="Send">
         <script type="text/javascript" src="cordova.js"></script>
         <h1>Report Event</h1>
-        <p></p>
+        <style>
+
+	.hiddenForm{
+		display: none;
+		margin-top: 0em;
+		margin-bottom: 0.0em;
+	}
+
+	.hiddenText{
+		display: none;
+		margin-top: 0.5em;
+		margin-bottom:0.5em;
+	}
+	.labelText{
+		display: block;
+		margin-top: 0.5em;
+		margin-bottom:0.5em;
+	}
+</style>
+<script>
+
+	function ShowDetailsText(value){
+		if(value == "Upset"|| value == "Verbal" || value == "PhysicalAgainstObjects" || value == "PhysicalAgainstSelf" || value == "PhysicalAgainstOthers" || value == "Food" ){
+			document.getElementById('BehaviourDetailsText').style.display = 'block';
+		}
+		else{
+			document.getElementById('BehaviourDetailsText').style.display = 'none';
+		}
+
+
+	}
+
+	function Showhide1(value){
+		if(value == "Accident"){
+			document.getElementById('Accident1').style.display = 'block';
+		}
+		else{
+		document.getElementById('Accident1').style.display = 'none';
+		}
+		if(value == "Behaviour"){
+			document.getElementById('BehaviourForm').style.display = 'block';
+			document.getElementById('BehaviourWhatHappened').style.display = 'block';
+			document.getElementById('BehaviourWhatHappText').style.display = 'block';
+		}
+		else{
+			document.getElementById('BehaviourForm').style.display = 'none';
+			document.getElementById('BehaviourWhatHappened').style.display = 'none';
+			document.getElementById('BehaviourWhatHappText').style.display = 'none';
+		}
+		if(value == "Incident"){
+			document.getElementById('Incident1').style.display = 'block';
+		}
+		else{
+			document.getElementById('Incident1').style.display = 'none';
+		}
+	}
+
+	function ShowForBehavWhatHappened(value){
+		ShowDetailsText(value);
+
+		if(value == "Upset"){
+			document.getElementById('BehaviourUpset').style.display = 'block';
+		}
+		else{
+			document.getElementById('BehaviourUpset').style.display = 'none';
+		}
+		if(value == "Verbal"){
+			document.getElementById('BehaviourVerbal').style.display = 'block';
+		}
+		else{
+			document.getElementById('BehaviourVerbal').style.display = 'none';
+		}
+		if(value == "PhysicalAgainstObjects"){
+			document.getElementById('BehaviourPhysicalAgainstObject').style.display = 'block';
+		}
+		else{
+			document.getElementById('BehaviourPhysicalAgainstObject').style.display = 'none';
+		}
+		if(value == "PhysicalAgainstSelf"){
+			document.getElementById('BehaviourPhysicalAgainstSelf').style.display = 'block';
+		}
+		else{
+			document.getElementById('BehaviourPhysicalAgainstSelf').style.display = 'none';
+		}
+		if(value == "PhysicalAgainstOthers"){
+			document.getElementById('BehaviourPhysicalAgainstOther').style.display = 'block';
+		}
+		else{
+			document.getElementById('BehaviourPhysicalAgainstOther').style.display = 'none';
+		}
+		if(value == "Food"){
+			document.getElementById('BehaviourFood').style.display = 'block';
+		}
+		else{
+			document.getElementById('BehaviourFood').style.display = 'none';
+		}
+	}
+
+	function ShowForBehaviourStaffResponse(value) {
+		if(value == "Restraint"){
+			document.getElementById("RestraintBSPText").style.display = 'block';
+			document.getElementById("RestraintBSPRadio1").style.display = 'block';
+			document.getElementById("RestraintBSPRadio2").style.display = 'block';
+			document.getElementById("RestraintDesiredOutcome").style.display = 'block';
+			document.getElementById("RestraintOutcomeComments").style.display = 'block';
+			document.getElementById("RestraintAlternatives").style.display = 'block';
+			document.getElementById("RestraintAlternativesComments").style.display = 'block';
+			document.getElementById("BSPYes").style.display = 'block';
+			document.getElementById("BSPNo").style.display = 'block';
+			document.getElementById("RestraintTypesText").style.display = 'block';
+			document.getElementById("RestraintTypes").style.display = 'block';
+
+		}
+		else{
+			document.getElementById("RestraintBSPText").style.display = 'none';
+			document.getElementById("RestraintBSPRadio1").style.display = 'none';
+			document.getElementById("RestraintBSPRadio2").style.display = 'none';
+			document.getElementById("RestraintDesiredOutcome").style.display = 'none';
+			document.getElementById("RestraintOutcomeComments").style.display = 'none';
+			document.getElementById("RestraintAlternatives").style.display = 'none';
+			document.getElementById("RestraintAlternativesComments").style.display = 'none';
+			document.getElementById("BSPYes").style.display = 'none';
+			document.getElementById("BSPNo").style.display = 'none';
+			document.getElementById("RestraintTypesText").style.display = 'none';
+			document.getElementById("RestraintTypes").style.display = 'none';
+		}
+		if(value == "PRN"){
+			document.getElementById("BehaviourPRN").style.display = 'block';
+			document.getElementById("BehaviourPRNText").style.display = 'block';
+		}
+		else{
+			document.getElementById("BehaviourPRN").style.display = 'none';
+			document.getElementById("BehaviourPRNText").style.display = 'none';
+		}
+
+	}
+
+
+
+</script>
+<head>
+<title>
+Title
+</title>
+</head>
+<body>
+<form id="General">
+	<select id="IAB"
+	onchange=Showhide1(this.options[this.selectedIndex].value)>
+			<option>Please Choose</option>
+			<option value = "Incident">Incident</option>
+			<option value="Accident">Accident</option>
+			<option value="Behaviour">Behaviour</option>
+	</select>
+
+	<!- ignored autopop fields to avoid clutter, this file is mostly just a collection of transcribed data->
+
+		<select id="EventLocation">
+			<option>Please Choose</option>
+			<option>Community-Indoors</option>
+			<option>Community-Outdoors</option>
+			<option>House-Indoors</option>
+			<option>House-Outdoors</option>
+			<option>In Vehicle-Parked</option>
+			<option>In Vehicle-Travelling</option>
+		</select>
+
+		<select id="PeopleInvolved">
+			<option>Please Choose</option>
+			<option>Person</option>
+			<option>Person/Person</option>
+			<option>Person/Staff</option>
+			<option>Person/Person/Staff</option>
+			<option>Person/Public</option>
+			<option>Family</option>
+			<option>Other</option>
+		</select>
+
+
+		<select id="EventCause">
+			<option>Appears to be in discomfort/ill</option>
+			<option>Asked to do something</option>
+			<option>Alone/Not engaged in material or activities</option>
+			<option>Could not get desired item/activity</option>
+			<option>Asked to wait</option>
+			<option>Preferred item or activity removed or stopped</option>
+			<option>Loud/Disruptive environment</option>
+			<option>Ongoing behaviour interrupted</option>
+			<option>Other person provoked</option>
+			<option>Transitional time</option>
+			<option>Attention from others</option>
+			<option>Attention given to others</option>
+			<option>Routine Task</option>
+			<option>New/difficult task/activity</option>
+			<option>Change of Routine</option>
+			<option>Recent medication change</option>
+			<option>Seemed unsettled or agitated</option>
+			<option>Other</option>
+		</select>
+
+</form>
+
+
+
+
+<form id = "Accident1" class = "hiddenForm">
+	Accident1
+	<br>
+	<select id = "AccidentType">
+		<option>Please Choose</option>
+		<option>Accident</option>
+		<option>Fall/Trip/Slip</option>
+		<option>Near Miss</option>
+		<option>Serious harm injury involved</option>
+		<option>Unknown/Unwitnessed injury</option>
+		<option>Vehicle - involving person</option>
+	</select>
+
+	<!-Only Shown if Vehicle is selected ->
+	<select id = "AccidentTypeVehicle">
+		<option>Please Choose</option>
+		<option>Accident</option>
+		<option>Fall/Trip/Slip</option>
+
+	</select>
+
+	<select id = "NatureOfInjury">
+		<option>Please Choose</option>
+		<option>Nil injury</option>
+		<option>Amputation</option>
+		<option>Broken Teeth</option>
+		<option>Bruising, Crushing or swelling</option>
+		<option>Burns</option>
+		<option>Concussion</option>
+		<option>Cuts or Laceration</option>
+		<option>Damage to artificial aid</option>
+		<option>Dislocation</option>
+		<option>Foreign body</option>
+		<option>Fracture of spine</option>
+		<option>Fracture broken bone</option>
+		<option>Hair was pulled out</option>
+		<option>Head injury</option>
+		<option>Hearing Loss</option>
+		<option>Internal injury of trunk(torso)</option>
+		<option>Nerves or spinal cord</option>
+		<option>No visible injuries, but experiencing pain or discomfort</option>
+		<option>Open wound</option>
+		<option>Puncture Wound</option>
+		<option>Redness of skin,(rash)</option>
+		<option>Sprain or Strain</option>
+		<option>Superficial injury (e.g. grazing)</option>
+	</select>
+
+	<!- Next two selects not seen if injury is Nil Injury->
+
+	<select id = "PartAffected">
+		<option>Please Choose</option>
+		<option>Not Applicable</option>
+		<option>Abdomen/Stomach</option>
+		<option>Ankle</option>
+		<option>Arm Upper</option>
+		<option>Arm Lower</option>
+		<option>Back Upper</option>
+		<option>Back Lower</option>
+		<option>Bottom</option>
+		<option>Cheek</option>
+		<option>Chest</option>
+		<option>Ear</option>
+		<option>Elbow</option>
+		<option>Eye</option>
+		<option>Face</option>
+		<option>Finger/s</option>
+		<option>Foot</option>
+		<option>Genitals</option>
+		<option>Groin</option>
+		<option>Hand</option>
+		<option>Head</option>
+		<option>Knee</option>
+		<option>Leg</option>
+		<option>Mouth</option>
+		<option>Multiple</option>
+		<option>Neck</option>
+		<option>Nose</option>
+		<option>Systemic(internal organs)</option>
+		<option>Teeth</option>
+		<option>Thumb</option>
+		<option>Toe/s</option>
+		<option>Wrist</option>
+	</select>
+
+  <p>Side of Body</p>
+	<select id = "SideOfBody">
+
+		<option>Please Choose</option>
+		<option>Left</option>
+		<option>Right</option>
+		<option>Left and Right</option>
+		<option>Not Applicable</option>
+	</select>
+
+	<select id = "AccidentTreatment">
+		<option>Please Choose</option>
+		<option>Nil Treatment</option>
+		<option>Counselled/Reassured</option>
+		<option>First Aid given at home</option>
+		<option>G.P.</option>
+		<option>Dentist</option>
+		<option>Phone Ambulance</option>
+		<option>A and E</option>
+		<option>Hospitalisation</option>
+		<option>PRN</option>
+	</select>
+
+
+</form>
+
+<form id = "BehaviourForm" class = "hiddenForm" action = "https://www.w3schools.com/action_page.php" target = "_blank" method="get">
+	<p id="BehaviourWhatHappText" class = "hiddenText">What Happened?</p>
+
+	<select
+	id = "BehaviourWhatHappened" class = "hiddenForm"
+	onchange=ShowForBehavWhatHappened(this.options[this.selectedIndex].value)>
+		<option>Please Choose</option>
+		<option value = "Upset">Upset or Agitated</option>
+		<option value = "Verbal">Verbal abuse</option>
+		<option value = "PhysicalAgainstObjects">Physical aggression against objects</option>
+		<option value = "PhysicalAgainstSelf">Physical aggression against self</option>
+		<option value = "PhysicalAgainstOthers">Physical aggression against others </option>
+		<option>Sexual assault - Police Involved</option>
+		<option>Inappropriate sexual behaviour(Including verbalisation)</option>
+		<option>Stripping</option>
+		<option>Near miss or attempt</option>
+		<option>Disturbance to and from members of public</option>
+		<option>Away from Setting(absconding)</option>
+		<option>Inappropriate urination/defecation</option>
+		<option>Insomnia</option>
+		<option>Fecal/body fluid smearing</option>
+		<option>Weapon Used</option>
+		<option>Inappropriate Behaviour</option>
+		<option value = "Food">Food</option>
+		<option>Threatening Behaviour</option>
+	</select>
+
+	<p id = "BehaviourDetailsText" class = "hiddenText">In what regard?</p>
+	<select id = "BehaviourUpset"class = "hiddenForm">
+		<option>Please Choose</option>
+		<option>Crying/Venting</option>
+		<option>Hand Wringing</option>
+		<option>Pacing, inability to be still</option>
+		<option>Screaming/Yelling, making loud noises</option>
+		<option>Tense facial expression/body language</option>
+	</select>
+
+	<select id = "BehaviourVerbal"class = "hiddenForm">
+		In what regard?
+		<option>Please Choose</option>
+		<option>Personal insults at others</option>
+		<option>Swearing, foul language</option>
+		<option>Violent threats towards self or others</option>
+	</select>
+
+	<select id = "BehaviourPhysicalAgainstObject"class = "hiddenForm">
+		In what regard?
+		<option>Please Choose</option>
+		<option>Slams doors, scatters object, makes a mess</option>
+		<option>Throws objects dangerously, punches/kicks furniture or walls</option>
+		<option>Breaks objects, smashes windows</option>
+	</select>
+
+<!-Show if Physical Aggression against self is selected ->
+	<select id = "BehaviourPhysicalAgainstSelf"class = "hiddenForm">
+		In what regard?
+		<option>Please Choose</option>
+		<option>Bangs head, Hits fists onto objects, Throws self(Uninjured)</option>
+		<option>Causes serious injury to self</option>
+		<option>Inflicts superficial cuts or bruises, minor burns etc</option>
+		<option>Picks, Scratches skin, pulls hair, hits, bites self</option>
+	</select>
+
+	<!-Show if Physical Aggression against others is selected ->
+	<select id = "BehaviourPhysicalAgainstOther"class = "hiddenForm">
+		In what regard?
+		<option>Please Choose</option>
+		<option>Bruises, causes sprains, welts etc to others</option>
+		<option>Strikes, kicks, punches, pulls hair, bites, pushes</option>
+		<option>Swings, grabs at people, clear threatening gestures</option>
+
+	</select>
+
+	<!-Show if Food is selected ->
+	<select id = "BehaviourFood"class = "hiddenForm">
+		In what regard?
+		<option>Please Choose</option>
+		<option>Food Obsessive</option>
+		<option>Prader Willi Syndrome</option>
+	</select>
+
+	<p class = "labelText">Comments in regards to event:</p>
+	<input type="text" id="BehaviourHappenComments">
+
+
+	<!-STAFF RESPONSE SECTION ->
+
+
+	<p class = "labelText">Staff Response:<p>
+
+	<select onchange=ShowForBehaviourStaffResponse(this.options[this.selectedIndex].value)>
+		<option>Called for assistance</option>
+		<option>Interruption/blocking</option>
+		<option>Nothing/Planned ignoring</option>
+		<option>Physical discomfort relieved</option>
+		<option>Continued Activity</option>
+		<option>Task/Activity Removed</option>
+		<option>Given item/Activity person wanted</option>
+		<option>given item, activity or attention (neutral)</option>
+		<option>Verbal redirection to activity</option>
+		<option>Physical redirection to activity(with gentle physical guidance)</option>
+		<option>Redirection to a different area(not forced)</option>
+		<option>Removal of other service users from the area(not forced)</option>
+		<option value = "Restraint">Physical restraint</option>
+		<option>Police involvement</option>
+		<option value= "PRN">PRN</option>
+		<option>Other</option>
+	</select>
+
+	<p id="BehaviourPRNText" class = "hiddenText">PRN Name/Dose<p>
+	<input type="text" id = "BehaviourPRN" class = "hiddenForm">
+
+
+	<p id ="RestraintBSPText"class = "hiddenText">Does the person have BSP?</p>
+	<input id="RestraintBSPRadio1" class = "hiddenForm" type="radio" name ="RestraintBSP" value = "Yes"><span id ="BSPYes" class = "hiddenText">Yes</span><br>
+	<input id="RestraintBSPRadio2" class = "hiddenForm" type="radio" name ="RestraintBSP" value = "No"><span id = "BSPNo" class = "hiddenText">No</span><br>
+
+	<p id ="RestraintDesiredOutcome"  class = "hiddenText">What was the desired outcome of the restraint?</p>
+	<input type="text" id="RestraintOutcomeComments" class = "hiddenForm">
+	<p  id = "RestraintAlternatives" class = "hiddenText">What alternative interventions were attempted before Restraint?</p>
+	<input type="text" id="RestraintAlternativesComments" class = "hiddenForm">
+
+	<p id = "RestraintTypesText"class = "hiddenText">Type of Restraint/s used?</p>
+
+
+</form>
+
+
+<form id = "Incident1" class = "hiddenForm">
+	Incident1
+	<select id = "IncidentWhatHappened">
+		<option>Please Choose</option>
+		<option>Assault, Abuse or Neglect</option>
+		<option>Death(unexpected)</option>
+		<option>Financial</option>
+		<option>injury as a result of someone's behaviour</option>
+		<option>Major event involving multiple community agencies or Spectrum Care departments</option>
+		<option>Major Systems Failure</option>
+		<option>Medical</option>
+		<option>Medication</option>
+		<option>Near Miss</option>
+		<option>Property Damage</option>
+		<option>Tools/Appliances</option>
+	</select>
+
+	<select id = "IncidentTreatment">
+		<option>Please Choose</option>
+		<option>Assault, Abuse or Neglect</option>
+		<option>Death(unexpected)</option>
+		<option>Financial</option>
+		<option>injury as a result of someone's behaviour</option>
+		<option>Major event involving multiple community agencies or Spectrum Care departments</option>
+		<option>Major Systems Failure</option>
+		<option>Medical</option>
+		<option>Medication</option>
+		<option>Near Miss</option>
+		<option>Property Damage</option>
+		<option>Tools/Appliances</option>
+	</select>
+
+		<select id = "IncidentMajorSystem">
+		<option>Please Choose</option>
+		<option>Assault, Abuse or Neglect</option>
+		<option>Death(unexpected)</option>
+		<option>Financial</option>
+		<option>injury as a result of someone's behaviour</option>
+		<option>Major event involving multiple community agencies or Spectrum Care departments</option>
+		<option>Major Systems Failure</option>
+		<option>Medical</option>
+		<option>Medication</option>
+		<option>Near Miss</option>
+		<option>Property Damage</option>
+		<option>Tools/Appliances</option>
+	</select>
+</form>
         <a href="index.html" id="Button">Home</a>
     </body>
 </html>
