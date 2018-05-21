@@ -35,9 +35,11 @@
 	function ShowDetailsText(value){
 		if(value == "Upset"|| value == "Verbal" || value == "PhysicalAgainstObjects" || value == "PhysicalAgainstSelf" || value == "PhysicalAgainstOthers" || value == "Food" ){
 			document.getElementById('BehaviourDetailsText').style.display = 'block';
+      document.getElementById('BehaviourDetailsText').disabled=false;
 		}
 		else{
 			document.getElementById('BehaviourDetailsText').style.display = 'none';
+      document.getElementById('BehaviourDetailsText').disabled=true;
 		}
 
 
@@ -46,26 +48,36 @@
 	function Showhide1(value){
 		if(value == "Accident"){
 			document.getElementById('Accident1').style.display = 'block';
+      document.getElementById('Accident1').disabled=false;
 		}
 		else{
 		document.getElementById('Accident1').style.display = 'none';
-		}
+    document.getElementById('Accident1').disabled=true;
+    }
 		if(value == "Behaviour"){
 			document.getElementById('BehaviourForm').style.display = 'block';
 			document.getElementById('BehaviourWhatHappened').style.display = 'block';
 			document.getElementById('BehaviourWhatHappText').style.display = 'block';
+      document.getElementById('BehaviourForm').disabled=false;
+      document.getElementById('BehaviourWhatHappened').disabled=false;
+      document.getElementById('BehaviourWhatHappText').disabled=false;
 		}
 		else{
 			document.getElementById('BehaviourForm').style.display = 'none';
 			document.getElementById('BehaviourWhatHappened').style.display = 'none';
 			document.getElementById('BehaviourWhatHappText').style.display = 'none';
+      document.getElementById('BehaviourForm').disabled=true;
+      document.getElementById('BehaviourWhatHappened').disabled=true;
+      document.getElementById('BehaviourWhatHappText').disabled=true;
 		}
 		if(value == "Incident"){
 			document.getElementById('Incident1').style.display = 'block';
+      document.getElementById('Incident1').disabled=false;
 		}
 		else{
 			document.getElementById('Incident1').style.display = 'none';
-		}
+      document.getElementById('Incident1').disabled=true;
+    }
 	}
 
 	function ShowForBehavWhatHappened(value){
@@ -73,39 +85,52 @@
 
 		if(value == "Upset"){
 			document.getElementById('BehaviourUpset').style.display = 'block';
+      document.getElementById('BehaviourUpset').disabled=false;
 		}
 		else{
 			document.getElementById('BehaviourUpset').style.display = 'none';
-		}
+      document.getElementById('BehaviourUpset').disabled=true;
+    }
 		if(value == "Verbal"){
 			document.getElementById('BehaviourVerbal').style.display = 'block';
-		}
+      document.getElementById('BehaviourVerbal').disabled=false;
+    }
 		else{
 			document.getElementById('BehaviourVerbal').style.display = 'none';
+      document.getElementById('BehaviourVerbal').disabled=true;
 		}
 		if(value == "PhysicalAgainstObjects"){
 			document.getElementById('BehaviourPhysicalAgainstObject').style.display = 'block';
+      document.getElementById('BehaviourPhysicalAgainstObject').disabled=false;
 		}
 		else{
 			document.getElementById('BehaviourPhysicalAgainstObject').style.display = 'none';
+      document.getElementById('BehaviourPhysicalAgainstObject').disabled=true;
 		}
 		if(value == "PhysicalAgainstSelf"){
 			document.getElementById('BehaviourPhysicalAgainstSelf').style.display = 'block';
+      document.getElementById('BehaviourPhysicalAgainstSelf').disabled=false;
 		}
 		else{
 			document.getElementById('BehaviourPhysicalAgainstSelf').style.display = 'none';
+      document.getElementById('BehaviourPhysicalAgainstSelf').disabled=true;
 		}
 		if(value == "PhysicalAgainstOthers"){
 			document.getElementById('BehaviourPhysicalAgainstOther').style.display = 'block';
-		}
+      document.getElementById('BehaviourPhysicalAgainstOther').disabled=false;
+    }
 		else{
 			document.getElementById('BehaviourPhysicalAgainstOther').style.display = 'none';
-		}
+      document.getElementById('BehaviourPhysicalAgainstOther').disabled=true;
+    }
 		if(value == "Food"){
 			document.getElementById('BehaviourFood').style.display = 'block';
+      document.getElementById('BehaviourFood').disabled=false;
+
 		}
 		else{
 			document.getElementById('BehaviourFood').style.display = 'none';
+      document.getElementById('BehaviourFood').disabled=true;
 		}
 	}
 
@@ -123,6 +148,17 @@
 			document.getElementById("RestraintTypesText").style.display = 'block';
 			document.getElementById("RestraintTypes").style.display = 'block';
 
+      document.getElementById('RestraintBSPText').disabled=false;
+      document.getElementById('RestraintBSPRadio1').disabled=false;
+      document.getElementById('RestraintBSPRadio2').disabled=false;
+      document.getElementById('RestraintDesiredOutcome').disabled=false;
+      document.getElementById('RestraintOutcomeComments').disabled=false;
+      document.getElementById('RestraintAlternatives').disabled=false;
+      document.getElementById('RestraintAlternativesComments').disabled=false;
+      document.getElementById('BSPYes').disabled=false;
+      document.getElementById('BSPNo').disabled=false;
+      document.getElementById('RestraintTypesText').disabled=false;
+      document.getElementById('RestraintTypes').disabled=false;
 		}
 		else{
 			document.getElementById("RestraintBSPText").style.display = 'none';
@@ -136,15 +172,31 @@
 			document.getElementById("BSPNo").style.display = 'none';
 			document.getElementById("RestraintTypesText").style.display = 'none';
 			document.getElementById("RestraintTypes").style.display = 'none';
+
+      document.getElementById('RestraintBSPText').disabled=true;
+      document.getElementById('RestraintBSPRadio1').disabled=true;
+      document.getElementById('RestraintBSPRadio2').disabled=true;
+      document.getElementById('RestraintDesiredOutcome').disabled=true;
+      document.getElementById('RestraintOutcomeComments').disabled=true;
+      document.getElementById('RestraintAlternatives').disabled=true;
+      document.getElementById('RestraintAlternativesComments').disabled=true;
+      document.getElementById('BSPYes').disabled=true;
+      document.getElementById('BSPNo').disabled=true;
+      document.getElementById('RestraintTypesText').disabled=true;
+      document.getElementById('RestraintTypes').disabled=true;
 		}
 		if(value == "PRN"){
 			document.getElementById("BehaviourPRN").style.display = 'block';
 			document.getElementById("BehaviourPRNText").style.display = 'block';
+      document.getElementById('BehaviourPRN').disabled=false;
+      document.getElementById('BehaviourPRNText').disabled=false;
 		}
 		else{
 			document.getElementById("BehaviourPRN").style.display = 'none';
 			document.getElementById("BehaviourPRNText").style.display = 'none';
-		}
+      document.getElementById('BehaviourPRN').disabled=true;
+      document.getElementById('BehaviourPRNText').disabled=true;
+    }
 
 	}
 
@@ -456,7 +508,9 @@ Title
 
 
 <form id = "Incident1" class = "hiddenForm">
-	Incident1
+	<h3>Incident</h3>
+  </br>
+  <p>What Happened?</p>
 	<select id = "IncidentWhatHappened">
 		<option>Please Choose</option>
 		<option>Assault, Abuse or Neglect</option>
@@ -472,6 +526,7 @@ Title
 		<option>Tools/Appliances</option>
 	</select>
 
+  <p>Treatment</p>
 	<select id = "IncidentTreatment">
 		<option>Please Choose</option>
 		<option>Assault, Abuse or Neglect</option>
@@ -487,6 +542,7 @@ Title
 		<option>Tools/Appliances</option>
 	</select>
 
+  <p>Major System</p>
 		<select id = "IncidentMajorSystem">
 		<option>Please Choose</option>
 		<option>Assault, Abuse or Neglect</option>

@@ -19,4 +19,5 @@
     <content src="https://fonts.googleapis.com/css?family=Comfortaa" />
     <content src="form.js" />
     <content src="pdf.js" />
+    <content src="EmailPage.html" />
 </widget>

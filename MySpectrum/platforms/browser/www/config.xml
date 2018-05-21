@@ -7,5 +7,5 @@
     <author email="support@phonegap.com" href="http://phonegap.com">
         PhoneGap Team
     </author>
-    <content src="pdf.js" />
+    <content src="EmailPage.html" />
 </widget>
