@@ -10,9 +10,16 @@
     </head>
     <body>
         <h1>View Policies</h1>
-        <button id="loadPDF2">inappbrowser</button>
-        
-        <a href="ftp://127.0.0.1/Reflection1.pdf"> Reflection</a>
+		
+		<form action="ViewPolicies.php" method="post">
+			Enter number to display Policies:
+			<input type="text" name="number">
+			<input type="submit" value="View PDFs" name="submit">
+		</form>
+		
+        <!--<button id="loadPDF">View PDFs</button>
+		
+		<a href="ftp://127.0.0.1/Reflection1.pdf"> Reflection</a>-->
         <a href="index.html" id="Button">Home</a>
     </body>
 </html>
