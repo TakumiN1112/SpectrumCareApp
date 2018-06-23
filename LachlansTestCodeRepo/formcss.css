@@ -34,9 +34,24 @@ body{
 }
 p{
 	font-family:Calibri;
+	font-weight:bold;
 }
 #rtitle{
 	font-family:Calibri;
 	font-size:120%;
 	font-weight:bold;
+}
+#IncidentWhatHappened{
+	width:95%;
+}
+
+#StaffResponse{
+	width:95%;
+}
+
+#NatureOfInjury{
+	width:95%;
+}
+#OtherInfo{
+	width:95%;
 }
