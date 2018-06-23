@@ -212,16 +212,38 @@ function DynamicFuncL4(value){
 	
 </script>
 <head>
-<title>
-Title
-</title>
+	<title>Report Event</title>
+	<link rel="stylesheet" type="text/css" href="formcss.css">
+	<link rel = "stylesheet" type = "text/css" href = "MySpectrum.css">
+	<link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
 </head>
 <body>
-
+	<div id="header">
+	
+			<div id="h1">
+				<div id="nav">
+				<div id="icon">
+				</div>
+				<div id="icon">
+				</div>
+				<div id="icon">
+				</div>	
+			</div>
+				<div id="title">
+				My Spectrum
+				</div>
+				<div id="logo">
+				<img src="images/SpectrumCareFlower.png" alt="logo" width="100%">
+				</div>
+			</div>
+	</div>
 
 
 <!-- give all input sections a short ID and a name, which will be used for the message in the PHP script-->
 <form id ="formMain" name = "formMain" action="PHPtest.php" method="post" >
+	<div id="rtitle">
+	Event Reporting Form
+	</div>
 <p class = labelText>Type of Event</p>	
 
 <select id ="IABGeneral" name="Event Type" onchange =IABGeneralFunc(this.options[this.selectedIndex].value)>
