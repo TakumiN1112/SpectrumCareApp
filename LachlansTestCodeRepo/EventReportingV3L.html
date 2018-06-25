@@ -1,37 +1,20 @@
 <!DOCTYPE HTML>
 <html>
-<style>
+<head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <link rel = "stylesheet" type = "text/css" href = "MySpectrum.css" />
+        <link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
+        <title>MySpectrum</title>
 
-	.hiddenForm{
-		display: none;
-		margin-top: 0em;
-		margin-bottom: 0.0em;
-		disabled = true;
-	}
-
-
-	.hiddenText{
-		display: none;
-		margin-top: 0.5em;
-		margin-bottom:0.5em;
-	}
-	.labelText{
-		display: block;
-		margin-top: 0.5em;
-		margin-bottom:0.5em;
-	}
-	.hiddenBreak{
-		display: none;
-	}
-	
-</style>
+</head>
 <script>
 
 function collapseElements(elementArray){
 	var itt = 0;
 	
 	for(itt = 0; itt < elementArray.length; ++itt){	
-		console.log("remove " + elementArray[itt]);
+	//	console.log("remove " + elementArray[itt]);
 		document.getElementById(elementArray[itt]).selectedIndex = 0;
 		
 		if(document.getElementById(elementArray[itt]).onchange != null){
@@ -47,93 +30,109 @@ function displayNext(elementArray){
 	var itt = 0;
 	
 	for(itt = 0; itt < elementArray.length; ++itt){
-		console.log("add " + elementArray[itt]);
+	//	console.log("add " + elementArray[itt]);
 		document.getElementById(elementArray[itt]).disabled = false;
 		document.getElementById(elementArray[itt]).style.display = "block";	
 	}
 }
 
-function IABGeneralFunc(value){
+function IABSelectionFunc(value){
 // Function creates red group 
 	//collapse Incident
-
-	collapseElements(["IncidentWhatHappened","textWhatHappened","Treatment","textTreatment","StaffResponse","textStaffResponse", "OtherInfo", "textOtherInfo", "CoordContactedYesNo", "textCoordContacted","AccidentType", "textAccidentType"]);
+	collapseElements(["IncidentWhatHappened","textWhatHappened","Treatment","textTreatment","StaffResponse","textStaffResponse", "OtherInfo", "textOtherInfo", "CoordContactedYesNo", "textCoordContacted"]);
 	//collapseAccident
+	collapseElements(["AccidentType", "textAccidentType"]);
 	//CollapseBehaviour
+	collapseElements(["textBehaviourWhatHappened","BehaviourWhatHappened","textWhatHappenedComment","WhatHappenedComment","textBehavourInjured", "BehaviourInjuredYesNo","BehaviourStaffResponse","textBehavStaffResponse"]);
 	
 	if(value == "Incident"){	
 		displayNext(["IncidentWhatHappened","textWhatHappened","Treatment","textTreatment","StaffResponse","textStaffResponse", "OtherInfo", "textOtherInfo", "CoordContactedYesNo", "textCoordContacted"]);
 	}
 	else if(value == "Accident"){
-		displayNext(["AccidentType", "textAccidentType","NatureOfInjury","textNatureOfInjury","PartAffected","textPartAffected","SideOfBody","textSideOfBody","Treatment","textTreatment", "OtherInfo", "textOtherInfo", "CoordContactedYesNo", "textCoordContacted",]);
+		displayNext(["AccidentType", "textAccidentType","NatureOfInjury","textNatureOfInjury","PartAffected","textPartAffected","SideOfBody","textSideOfBody","Treatment","textTreatment", "OtherInfo", "textOtherInfo", "CoordContactedYesNo", "textCoordContacted"]);
 
 	}
 	else if(value == "Behaviour"){
-
+		displayNext(["textBehaviourWhatHappened","BehaviourWhatHappened","textWhatHappenedComment","WhatHappenedComment","BehaviourStaffResponse","textBehavStaffResponse","textOtherInfo", "OtherInfo", "textCoordContacted","CoordContactedYesNo", "textBehavourInjured", "BehaviourInjuredYesNo"]);
 	}
 	
 }
 
-function DynamicFuncL1(value){
+function DynamicFuncL1(value,changedElement){
 	//function Creates orange group based on red group selections
 	if(document.getElementById("IABGeneral").options[document.getElementById("IABGeneral").selectedIndex].value != "Accident" &&
-		document.getElementById("AbuseInjuryYesNo").options[document.getElementById("AbuseInjuryYesNo").selectedIndex].value != "Yes"){
+		document.getElementById("AbuseInjuryYesNo").options[document.getElementById("AbuseInjuryYesNo").selectedIndex].value != "Yes"&&
+		document.getElementById("RestraintInjuredYesNo").options[document.getElementById("RestraintInjuredYesNo").selectedIndex].value != "Yes"){
 		collapseElements(["NatureOfInjury","textNatureOfInjury","PartAffected","textPartAffected","SideOfBody","textSideOfBody"]);
 	}
 	if(document.getElementById("IncidentWhatHappened").options[document.getElementById("IncidentWhatHappened").selectedIndex].value != "Assault, Abuse or Neglect"){
 		collapseElements(["textIncInjury","AbuseInjuryYesNo"]);
 	}
 	
-		collapseElements(["FinancialAmount", "textFinancialAmount","textCommunityAgencies","FireServiceCheckbox","PoliceCheckbox", "AmbulanceCheckbox","textSpectrumCareDepartments", "ServiceDeliveryCheckbox", "HomesofChoiceCheckbox", "QualityandRiskCheckbox", "HRCheckbox", "textMajorSystem", "MajorSystems1", "MajorSystems2", "MajorSystems3", "MajorSystems4","IncidentMedical", "textIncidentMedical", "IncidentMedication", "textMedicationProblem","AdmissionTime", "textAdmissionTime", "AdmissionDate", "textAdmissionDate", "DischargeTime", "textDischargeTime", "textPRN","PRN","AccidentVehicleType", "textAccidentVehicleType"]);
+	collapseElements(["FinancialAmount", "textFinancialAmount","textCommunityAgencies","FireServiceCheckbox","PoliceCheckbox", "AmbulanceCheckbox","textSpectrumCareDepartments", "ServiceDeliveryCheckbox", "HomesofChoiceCheckbox", "QualityandRiskCheckbox", "HRCheckbox", "textMajorSystem", "MajorSystems1", "MajorSystems2", "MajorSystems3", "MajorSystems4","IncidentMedical", "textIncidentMedical", "IncidentMedication", "textMedicationProblem", "AdmissionDate", "AccidentVehicleTreatment", "textAccidentVehicleTreatment"]);
 //INCIDENT
 	//What Happened
-	if(value == "Assault, Abuse or Neglect"){
-		displayNext(["textIncInjury","AbuseInjuryYesNo"]);
+	if(changedElement == "IncidentWhatHappened"){
+		if(value == "Assault, Abuse or Neglect"){
+			displayNext(["textIncInjury","AbuseInjuryYesNo"]);
+		}
+		else if(value == "Financial"){
+			displayNext(["FinancialAmount", "textFinancialAmount"]);
+		}
+		else if(value == "injury as a result of someone's behaviour" ){
+			displayNext(["NatureOfInjury","textNatureOfInjury","PartAffected","textPartAffected","SideOfBody","textSideOfBody"]);
+		}
+		else if(value == "Major event involving multiple community agencies or Spectrum Care departments"){
+			displayNext(["textCommunityAgencies","FireServiceCheckbox","PoliceCheckbox", "AmbulanceCheckbox","textSpectrumCareDepartments", "ServiceDeliveryCheckbox", "HomesofChoiceCheckbox", "QualityandRiskCheckbox", "HRCheckbox"]);
+		}
+		else if(value == "Major systems failure"){
+			displayNext(["textMajorSystem", "MajorSystems1", "MajorSystems2", "MajorSystems3", "MajorSystems4"]);
+		
+		}
+		else if(value == "Medical"){
+			displayNext(["IncidentMedical", "textIncidentMedical"]);
+		}
+		else if(value == "Medication"){
+			displayNext(["IncidentMedication", "textMedicationProblem"]);
+		}
 	}
-	else if(value == "Financial"){
-		displayNext(["FinancialAmount", "textFinancialAmount"]);
-	}
-	else if(value == "injury as a result of someone's behaviour" ){
-		displayNext(["NatureOfInjury","textNatureOfInjury","PartAffected","textPartAffected","SideOfBody","textSideOfBody"]);
-	}
-	else if(value == "Major event involving multiple community agencies or Spectrum Care departments"){
-		displayNext(["textCommunityAgencies","FireServiceCheckbox","PoliceCheckbox", "AmbulanceCheckbox","textSpectrumCareDepartments", "ServiceDeliveryCheckbox", "HomesofChoiceCheckbox", "QualityandRiskCheckbox", "HRCheckbox"]);
-	}
-	else if(value == "Major systems failure"){
-		displayNext(["textMajorSystem", "MajorSystems1", "MajorSystems2", "MajorSystems3", "MajorSystems4"]);
-	
-	}
-	else if(value == "Medical"){
-		displayNext(["IncidentMedical", "textIncidentMedical"]);
-	}
-	else if(value == "Medication"){
-		displayNext(["IncidentMedication", "textMedicationProblem"]);
-	}
-	
 	//Treatment
 	//made own function due to problems
 //ACCIDENT
 	if(value == "Vehicle - involving person"){
-		displayNext(["AccidentVehicleType", "textAccidentVehicleType"]);
+		displayNext(["AccidentVehicleTreatment", "textAccidentVehicleTreatment"]);
 	}
 //BEHAVIOUR
+	if(changedElement == "BehaviourWhatHappened"){
+		collapseElements(["BehaviourUpset", "textBehaviourDetails","BehaviourVerbal","BehaviourPhysicalAgainstObject","BehaviourPhysicalAgainstSelf","BehaviourPhysicalAgainstOther","BehaviourFood"]);
+		if(value == "Upset or agitated"){
+			displayNext(["BehaviourUpset", "textBehaviourDetails"]);
+		}
+		else if(value == "Verbal abuse"){
+			displayNext(["BehaviourVerbal","textBehaviourDetails"]);
+		}	
+		else if(value == "Physical aggression against objects"){
+			displayNext(["BehaviourPhysicalAgainstObject","textBehaviourDetails"]);
+		}
+		else if(value == "Physical aggression against self"){
+			displayNext(["BehaviourPhysicalAgainstSelf","textBehaviourDetails"]);
+		}
+		else if(value == "Physical aggression against others"){
+			displayNext(["BehaviourPhysicalAgainstOther","textBehaviourDetails"]);
+		}
+		else if(value == "Food"){
+			displayNext(["BehaviourFood","textBehaviourDetails"]);
+		}
+	}	
 }
 
-function treatmentFunc(value){
-	collapseElements(["AdmissionTime", "textAdmissionTime", "AdmissionDate", "textAdmissionDate", "DischargeTime", "textDischargeTime", "textPRN","PRN"]);
-	
-	if(value == "Hospitalisation"){
-		displayNext(["AdmissionTime", "textAdmissionTime", "AdmissionDate", "textAdmissionDate", "DischargeTime", "textDischargeTime"]);
-	}
-	else if(value == "PRN"){
-		displayNext(["textPRN","PRN"]);
-	}
-}
 function DynamicFuncL2(value){
 //function creates yellow group based on orange group selections
 	//Separate due to the Accident section being Multilevelled
 	if(document.getElementById("IABGeneral").options[document.getElementById("IABGeneral").selectedIndex].value != "Accident" &&
-		document.getElementById("IncidentWhatHappened").options[document.getElementById("IncidentWhatHappened").selectedIndex].value != "injury as a result of someone's behaviour"){
+		document.getElementById("IncidentWhatHappened").options[document.getElementById("IncidentWhatHappened").selectedIndex].value != "injury as a result of someone's behaviour" &&
+		document.getElementById("RestraintInjuredYesNo").options[document.getElementById("RestraintInjuredYesNo").selectedIndex].value != "Yes"){
+
 		collapseElements(["NatureOfInjury","textNatureOfInjury","PartAffected","textPartAffected","SideOfBody","textSideOfBody"]);
 	}
 	//all other elements
@@ -187,8 +186,8 @@ function DynamicFuncL3(value){
 	//Separate due to the Accident section being Multilevelled
 	if(document.getElementById("IABGeneral").options[document.getElementById("IABGeneral").selectedIndex].value != "Accident" &&
 		document.getElementById("IncidentWhatHappened").options[document.getElementById("IncidentWhatHappened").selectedIndex].value != "injury as a result of someone's behaviour" &&
-		document.getElementById("AbuseInjuryYesNo").options[document.getElementById("AbuseInjuryYesNo").selectedIndex].value != "Yes"
-	){
+		document.getElementById("AbuseInjuryYesNo").options[document.getElementById("AbuseInjuryYesNo").selectedIndex].value != "Yes" &&
+		document.getElementById("RestraintInjuredYesNo").options[document.getElementById("RestraintInjuredYesNo").selectedIndex].value != "Yes"){
 		collapseElements(["NatureOfInjury","textNatureOfInjury","PartAffected","textPartAffected","SideOfBody","textSideOfBody"]);
 	}
 	
@@ -204,66 +203,227 @@ function DynamicFuncL3(value){
 //BEHAVIOUR		
 }
 
+
+function generalPeopleFunc(myElementID,value){
+//function for the people involved area
+	if(myElementID == "PeopleInvolved"){
+		collapseElements(["GenPeopleNumberInvoved", "textPeopleNumberInvolved","GenStaffNumberInvoved", "textStaffNumberInvolved"]);
+
+		if(value == "Person/Person"){
+			displayNext(["GenPeopleNumberInvoved", "textPeopleNumberInvolved"]);
+		}
+		else if(value == "Person/Staff"){
+			displayNext(["GenStaffNumberInvoved", "textStaffNumberInvolved"]);
+		}
+		else if(value == "Person/Person/Staff"){
+			displayNext(["GenPeopleNumberInvoved", "textPeopleNumberInvolved","GenStaffNumberInvoved", "textStaffNumberInvolved"]);
+		
+		}
+	}
+	else if(myElementID == "EventCause"){
+		collapseElements(["EventCauseCommentsNotRequired","EventCauseCommentsRequired"]);
+		if(value == "Other"){
+			displayNext(["EventCauseCommentsRequired"]);
+		}
+		else{
+			displayNext(["EventCauseCommentsNotRequired"]);
+		}
+	}
+	
+}
+
+function generalEndFunc(value,changedElement){
+	if(changedElement == "Treatment"){	
+		collapseElements(["AdmissionTime", "textAdmissionTime", "AdmissionDate", "textAdmissionDate", "DischargeTime", "textDischargeTime","textDischargeDate", "DischargeDate", "textPRN","PRN"]);
+		
+		if(value == "Hospitalisation"){
+			displayNext(["AdmissionTime", "textAdmissionTime", "AdmissionDate", "textAdmissionDate", "DischargeTime", "textDischargeTime", "textDischargeDate", "DischargeDate"]);
+		}
+		else if(value == "PRN"){
+			displayNext(["textPRN","PRN"]);
+		}
+	}
+	else if(changedElement == "StaffResponse" ||
+			changedElement == "BehaviourStaffResponse"){
+		collapseElements(["textPRN","PRN","RestraintBSPYesNo", "textRestraintBSP","RestraintDesiredOutcome","textRestraintDesiredOutcome","RestraintAlternatives","textRestraintAlternatives","textRestraintTypes","labelRestraintCheckboxes","RestraintOnePersonVehicle","RestraintOnePersonEscort","RestraintOnePersonSitting","RestraintTwoPersonEscort","RestraintTwoPersonSitting","textRestraintObservations","RestraintObservations","textRestraintOutcome","RestraintOutcome","textRestraintSupport","RestraintSupportYesNo","textRestraintInjured","RestraintInjuredYesNo"]);
+		
+		if(value == "Physical restraint"){
+			displayNext(["RestraintBSPYesNo","textRestraintBSP","RestraintDesiredOutcome","textRestraintDesiredOutcome","RestraintAlternatives","textRestraintAlternatives","textRestraintTypes","labelRestraintCheckboxes","RestraintOnePersonVehicle","RestraintOnePersonEscort","RestraintOnePersonSitting","RestraintTwoPersonEscort","RestraintTwoPersonSitting","textRestraintObservations","RestraintObservations","textRestraintOutcome","RestraintOutcome","textRestraintSupport","RestraintSupportYesNo","textRestraintInjured","RestraintInjuredYesNo"]);
+		}
+		else if(value == "PRN"){
+			displayNext(["textPRN","PRN"]);
+		
+		}
+		
+	}
+}
+
 function DynamicFuncL4(value){
 //function creates blue group based on green group selections
-//PRobably Delete
+//Probably Delete
+}
+function restraintDynamicFunc(changedElement,value){
+//must be in this order because non checkbox elements are using this function	
+	if(changedElement == "RestraintOnePersonVehicle"){
+		if(document.getElementById(changedElement).checked){
+			displayNext(["textRestraintOnePersonVehicleDur","RestraintOnePersonVehicleDur","textRestraintOnePersonVehicleComments","RestraintOnePersonVehicleComments"]);
+		}
+		else if(!document.getElementById(changedElement).checked){
+			collapseElements(["textRestraintOnePersonVehicleDur","RestraintOnePersonVehicleDur","textRestraintOnePersonVehicleComments","RestraintOnePersonVehicleComments"]);
+		}
+	}
+	else if(changedElement == "RestraintOnePersonEscort"){
+		if(document.getElementById(changedElement).checked){
+			displayNext(["textRestraintOnePersonEscortDur","RestraintOnePersonEscortDur","textRestraintOnePersonEscortComments","RestraintOnePersonEscortComments"]);
+		}
+		else if(!document.getElementById(changedElement).checked){
+			collapseElements(["textRestraintOnePersonEscortDur","RestraintOnePersonEscortDur","textRestraintOnePersonEscortComments","RestraintOnePersonEscortComments"]);
+		}
+	}
+	else if(changedElement == "RestraintOnePersonSitting"){
+		if(document.getElementById(changedElement).checked){
+			displayNext(["textRestraintOnePersonSittingDur","RestraintOnePersonSittingDur", "textRestraintOnePersonSittingComments", "RestraintOnePersonSittingComments"]);
+		}
+		else if(!document.getElementById(changedElement).checked){
+			collapseElements(["textRestraintOnePersonSittingDur","RestraintOnePersonSittingDur", "textRestraintOnePersonSittingComments", "RestraintOnePersonSittingComments"]);
+		}
+	}
+	else if(changedElement == "RestraintTwoPersonEscort"){
+		if(document.getElementById(changedElement).checked){	
+			displayNext(["textRestraintTwoPersonEscortDur","RestraintTwoPersonEscortDur","textRestraintTwoPersonEscortComments","RestraintTwoPersonEscortComments"]);
+		}
+		else if(!document.getElementById(changedElement).checked){
+			collapseElements(["textRestraintTwoPersonEscortDur","RestraintTwoPersonEscortDur","textRestraintTwoPersonEscortComments","RestraintTwoPersonEscortComments"]);
+		}
+	}
+	else if(changedElement == "RestraintTwoPersonSitting"){
+		if(document.getElementById(changedElement).checked){
+			displayNext(["textRestraintTwoPersonSittingDur", "RestraintTwoPersonSittingDur","textRestraintTwoPersonSittingComments","RestraintTwoPersonSittingComments"]);
+		}
+		else if(!document.getElementById(changedElement).checked){
+			collapseElements(["textRestraintTwoPersonSittingDur", "RestraintTwoPersonSittingDur","textRestraintTwoPersonSittingComments","RestraintTwoPersonSittingComments"]);		
+		}
+	}
+	else if(changedElement == "RestraintSupportYesNo"){
+		collapseElements(["textRestraintSupportDetails","RestraintSupportDetails"]);
+		if(value == "Yes"){
+			displayNext(["textRestraintSupportDetails","RestraintSupportDetails"]);
+		}
+	}
+	else if(changedElement == "RestraintInjuredYesNo"){
+		collapseElements(["textNatureOfInjury","NatureOfInjury","textPartAffected","PartAffected","textSideOfBody","SideOfBody"]);
+		
+		if(value == "Yes"){
+			displayNext(["textNatureOfInjury","NatureOfInjury","textPartAffected","PartAffected","textSideOfBody","SideOfBody"]);
+		}
+	}
+	
 }
 	
-	
+
 </script>
-<head>
-	<title>Report Event</title>
-	<link rel="stylesheet" type="text/css" href="formcss.css">
-	<link rel = "stylesheet" type = "text/css" href = "MySpectrum.css">
-	<link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
-</head>
+
 <body>
-	<div id="header">
-	
-			<div id="h1">
-				<div id="nav">
-				<div id="icon">
-				</div>
-				<div id="icon">
-				</div>
-				<div id="icon">
-				</div>	
-			</div>
-				<div id="title">
-				My Spectrum
-				</div>
-				<div id="logo">
-				<img src="images/SpectrumCareFlower.png" alt="logo" width="100%">
-				</div>
-			</div>
-	</div>
 
 
-<!-- give all input sections a short ID and a name, which will be used for the message in the PHP script-->
+<!-- give all input sections a short ID and a name. The name will be used for the message in the PHP script-->
 <form id ="formMain" name = "formMain" action="PHPtest.php" method="post" >
-	<div id="rtitle">
-	Event Reporting Form
-	</div>
-<p class = labelText>Type of Event</p>	
+<!--General  -->
+	<p id ="textPersonSupported" class = labelText>Name of Person Supported</p>
+	<input type="text" id="PersonSupported" name="Name of Person Supported" class = displayedForm></input>
 
-<select id ="IABGeneral" name="Event Type" onchange =IABGeneralFunc(this.options[this.selectedIndex].value)>
-		<option value="Please Choose">Please Choose</option>
-		<option value = "Incident">Incident</option>
+	<p id ="textIANumber" class = labelText>IA Number</p>
+	<input type="text" id="IANumber" name="IA Number" class = displayedForm></input>
+
+	<p id ="textInvestigatiingCoordinator" class = labelText>Investigating Coordinator</p>
+	<input type="text" id="InvestigatingCoord" name="Investigating Coordinator" class = displayedForm></input>
+
+	<p id ="textGenHouseCentre" class = labelText>House/Centre</p>
+	<input type="text" id="GenHouseCentre" name="House/Centre" class = displayedForm></input>
+
+	<p id ="textStartDate" class = labelText>Start Date and time</p>
+	<input type=date id="GenStartDate" name="Start date" class = displayedForm></input>
+	<input type=time id="GenStartTime" name="Start time" class = displayedForm></input>
+
+	<p id ="textFinishDate" class = labelText>Finish Date and time</p>
+	<input type=date id="GenFinishDate" name="Finish date" class = displayedForm></input>
+	<input type=time id="GenFinishTime" name="Finish time" class = displayedForm></input>
+
+	<p id ="textEventLocation" class = labelText>Location of event</p>
+	<select id ="EventLocation" name="Event Location" class =displayedForm>
+		<option value="Please Choose" selected disabled hidden>Please Choose</option>
+		<option value="Community-Indoors">Community-Indoors</option>
+		<option value="Community-Outdoors">Community-Outdoors</option>
+		<option value="House-Indoors">House-Indoors</option>
+		<option value="House-Outdoors">House-Outdoors</option>
+		<option value="In Vehcile-Parked">In Vehcile-Parked</option>
+		<option value="In Vehicle-Travelling">In Vehicle-Travelling</option>
+	</select>
+
+	<p id ="textPeopleInvolved" class = labelText>Who was involved</p>
+	<select id ="PeopleInvolved" name="People Involved" class =displayedForm onchange =generalPeopleFunc(this.id,this.options[this.selectedIndex].value)>
+		<option value="Please Choose" selected disabled hidden>Please Choose</option>
+		<option value="Person">Person</option>
+		<option value="Person/Person">Person/Person</option>
+		<option value="Person/Staff">Person/Staff</option>
+		<option value="Person/Person/Staff">Person/Person/Staff</option>
+		<option value="Person/Public">Person/Public</option>
+		<option value="Family">Family</option>
+		<option value="Other">Other</option>
+	</select>
+
+	<p id ="textPeopleNumberInvolved" class = hiddenText>Number of other people Involved</p>
+	<input type=number min=1 max=4 id="GenPeopleNumberInvoved" name="Number of other people involved" disabled=true class = hiddenForm></input>
+
+	<p id ="textStaffNumberInvolved" class = hiddenText>Number of other staff Involved(not including yourself)</p>
+	<input type=number min=0 max=4 id="GenStaffNumberInvoved" name="Number of other staff involved" disabled=true class = hiddenForm></input>
+
+	<p id ="textEventCause" class = labelText>What happened before the event?(antecedent, triggers, cause)</p>
+	<select id ="EventCause" name="What happened before the event" class =displayedForm onchange =generalPeopleFunc(this.id,this.options[this.selectedIndex].value)>
+		<option value="Please Choose" selected disabled hidden>Please Choose</option>
+		<option value="Appears to be in discomfort/ill">Appears to be in discomfort/ill</option>
+		<option value="Asked to do something">Asked to do something</option>
+		<option value="Alone/not engaged in materials or activities">Alone/not engaged in materials or activities</option>
+		<option value="Could not get desired item/activity">Could not get desired item/activity</option>
+		<option value="Asked to wait">Asked to wait</option>
+		<option value="Preferred item/activity removed/stopped">Preferred item/activity removed/stopped</option>
+		<option value="Loud/Disruptive environment">Loud/Disruptive environment</option>
+		<option value="Ongoing behaviour interrupted">Ongoing behaviour interrupted</option>
+		<option value="Other person provoked">Other person provoked</option>
+		<option value="Transitional time">Transitional time</option>
+		<option value="Attention from other">Attention from other</option>
+		<option value="Attention given to others">Attention given to others</option>
+		<option value="Routine task">Routine task</option>
+		<option value="New/Difficult task/Activity">New/Difficult task/Activity</option>
+		<option value="Change of Routine">Change of Routine</option>
+		<option value="Recent medication change">Recent Medication Change</option>
+		<option value="Seemed unsettled or agitated">Seemed unsettled or agitated</option>
+		<option value="Other">Other</option>
+	</select>
+
+	<p id ="textEventCauseComments" class = labelText>Comments about what happened before the event</p>
+	<input type="text" id="EventCauseCommentsNotRequired" name="Comments on cause of event" class = displayedForm></input>
+	<input type="text" id="EventCauseCommentsRequired" name="Comments on cause of event" disabled hidden required class = hiddenForm></input>
+
+	<p id ="textIABGeneral" class = labelText>Event Type</p>
+	<select id ="IABGeneral" name="Event Type" onchange =IABSelectionFunc(this.options[this.selectedIndex].value)>
+		<option value="Please Choose" selected disabled hidden>Please Choose</option>
+		<option value="Incident">Incident</option>
 		<option value="Accident">Accident</option>
-		<option value="Behaviour">Behaviour</option>
+		<option value="Behaviour">Behaviour </option>
 	</select>
 	
 	
 <!-- INCIDENT -->
 
 <p id ="textWhatHappened" class = hiddenText>What Happened</p>
-	<select id = "IncidentWhatHappened" name="What Happened" class = hiddenForm disabled = true onchange=DynamicFuncL1(this.options[this.selectedIndex].value)>
-		<option value="Please Choose">Please Choose</option>
+	<select id = "IncidentWhatHappened" name="What Happened" class = hiddenForm disabled = true onchange=DynamicFuncL1(this.options[this.selectedIndex].value,this.id)>
+		<option value="Please Choose" selected disabled hidden >Please Choose</option>
 		<option value="Assault, Abuse or Neglect">Assault, Abuse or Neglect</option>
 		<option value="Death(unexpected)">Death(unexpected)</option>
 		<option value="Financial">Financial</option>
 		<option value="injury as a result of someone's behaviour">injury as a result of someone's behaviour</option>
-		<option value="Major event involving multiple community agencies or Spectrum Care departments">Major event involving multiple community agencies or Spectrum Care departments</option>
+		<option value="Major event involving multiple community agencies or Spectrum Care departments">Major event-multiple community agencies or Spectrum Care depts</option>
 		<option value="Major systems failure">Major Systems Failure</option>
 		<option value="Medical">Medical</option>
 		<option value="Medication">Medication</option>
@@ -273,8 +433,8 @@ function DynamicFuncL4(value){
 	</select>
 
 	<p id ="textAccidentType" name ="Type of Accident" class = hiddenText>Type of Accident</p>
-	<select id = "AccidentType" name = "Accident Type" class = hiddenForm onchange=DynamicFuncL1(this.options[this.selectedIndex].value)>
-		<option value="Please Choose">Please Choose</option>
+	<select id = "AccidentType" name = "Accident Type" class = hiddenForm disabled = true onchange=DynamicFuncL1(this.options[this.selectedIndex].value,this.id)>
+		<option value="Please Choose" selected disabled hidden>Please Choose</option>
 		<option value="Accident">Accident</option>
 		<option value="Fall/Trip/Slip">Fall/Trip/Slip</option>
 		<option value="Near miss">Near miss</option>
@@ -283,9 +443,9 @@ function DynamicFuncL4(value){
 		<option value="Vehicle - involving person">Vehicle - involving person</option>
 	</select>
 	
-	<p id ="textAccidentVehicleType" class = hiddenText>Vehicle Accident Treatment</p>
-	<select id = "AccidentVehicleType" name="Vehicle accident treatment" class=hiddenForm>
-		<option value="Please Choose">Please Choose</option>
+	<p id ="textAccidentVehicleTreatment" class = hiddenText disabled = true>Vehicle Accident Treatment</p>
+	<select id = "AccidentVehicleTreatment" name="Vehicle accident treatment" class=hiddenForm disabled = true>
+		<option value="Please Choose" selected disabled hidden>Please Choose</option>
 		<option value="Hospitalisation less than 48 hours">Hospitalisation less than 48 hours</option>
 		<option value="A&E treatment">A&E treatment</option>
 		<option value="Hospitalisation greater than 48 hours">Hospitalisation greater than 48 hours</option>
@@ -293,7 +453,7 @@ function DynamicFuncL4(value){
 	
 	<p id ="textIncidentMedical" name = "Medical Problem" class = hiddenText>Medical Problem</p>
 	<select id = "IncidentMedical" name = "Medical Problem" disabled = true class = hiddenForm onchange=DynamicFuncL2(this.options[this.selectedIndex].value)>
-		<option value="Please Choose">Please Choose</option>
+		<option value="Please Choose" selected disabled hidden>Please Choose</option>
 		<option value="Asthma">Asthma</option>
 		<option value="Bladder Infection (and indwelling catheter)">Bladder infection(and indwelling catheter)</option>
 		<option value="Bowel motion signs of blood present">Bowel motion signs of blood present</option>
@@ -317,8 +477,8 @@ function DynamicFuncL4(value){
 	</select>
 	
 	<p id ="textChokingHarm" name = "Harm from choking" class = hiddenText>level of harm?</p>
-	<select id = "ChokingHarm" name="Choking harm" class = hiddenForm>
-		<option value="Please Choose">Please Choose</option>
+	<select id = "ChokingHarm" name="Choking harm" class = hiddenForm disabled = true>
+		<option value="Please Choose" selected disabled hidden>Please Choose</option>
 		<option value="No harm">No harm</option>
 		<option value="Temporary harm(e.g. scratched throat)">Temporary harm(e.g. scratched throat)</option>
 		<option value="Permanent harm(e.g.Brain damage)">Permanent harm(e.g. Brain damage)</option>
@@ -327,14 +487,14 @@ function DynamicFuncL4(value){
 	
 	<p id ="textIncInjury" class = hiddenText>Was there any injury?</p>
 	<select id = "AbuseInjuryYesNo" name="Was there any injury?" disabled = true class = hiddenForm onchange=DynamicFuncL2(value)>
-		<option value="Please Choose">Please Choose</option>
+		<option value="Please Choose" selected disabled hidden>Please Choose</option>
 		<option value="Yes">Yes</option>
 		<option value="No">No</option>
 	</select>	
 	
 	<p id ="textFinancialAmount" class = hiddenText>Amount Involved?</p>
 	<select id = "FinancialAmount" name ="Amount Involved" disabled = true class = hiddenForm>
-		<option value="Please Choose">Please Choose</option>
+		<option value="Please Choose" selected disabled hidden>Please Choose</option>
 		<option value="Less than $20.00">Less than $20.00</option>
 		<option value="More than $20.00">More than $20.00</option>
 	</select>
@@ -342,28 +502,28 @@ function DynamicFuncL4(value){
 	<!-- CHECKBOXES need fixing for formatting-->
 	<label id="textCommunityAgencies" class = hiddenText><br>Community Agencies:
 		<br>
-		<input type="checkbox" id = "FireServiceCheckbox" name = "Fire Service" class = hiddenForm >Fire Service
-		<input type="checkbox" id = "PoliceCheckbox" name = "Police" class = hiddenForm>Police<br>
-		<input type="checkbox" id = "AmbulanceCheckbox" name = "Ambulance" class = hiddenForm>Ambulance<br>
+		<input type="checkbox" id = "FireServiceCheckbox" name = "Fire Service" value="Yes" class = hiddenForm >Fire Service
+		<input type="checkbox" id = "PoliceCheckbox" name = "Police" value="Yes" class = hiddenForm>Police<br>
+		<input type="checkbox" id = "AmbulanceCheckbox" name = "Ambulance" value="Yes" class = hiddenForm>Ambulance<br>
 	</label>
 	<label id="textSpectrumCareDepartments" class = hiddenText>Spectrum Care Departments:
 		<br>
-		<input type="checkbox" id = "ServiceDeliveryCheckbox" name = "Service Delivery" class = hiddenForm>Service Delivery<br>
-		<input type="checkbox" id = "HomesofChoiceCheckbox" name = "Homes of Choice" class = hiddenForm>Homes of Choice<br>
-		<input type="checkbox" id = "QualityandRiskCheckbox" name = "Quality and Risk" class = hiddenForm>Quality and Risk<br>
+		<input type="checkbox" id = "ServiceDeliveryCheckbox" name = "Service Delivery" value="Yes" class = hiddenForm>Service Delivery<br>
+		<input type="checkbox" id = "HomesofChoiceCheckbox" name = "Homes of Choice" value="Yes" class = hiddenForm>Homes of Choice<br>
+		<input type="checkbox" id = "QualityandRiskCheckbox" name = "Quality and Risk" value="Yes" class = hiddenForm>Quality and Risk<br>
 		<input type="checkbox" id = "HRCheckbox" name = "HR">HR<br>
 	</label>
 		
-	<label id ="textMajorSystem" name = "Major Systems Affected" class = hiddenText><br>Major systems Affected?
-		<input type="checkbox" id="MajorSystems1" value="Fire(House/centre evacuated and not usable)" class = hiddenForm>Fire(House/centre evacuated and not usable)<br>
-		<input type="checkbox" id="MajorSystems2" value="Natural disaster(House/centre evacuated and not usable)" class = hiddenForm>Natural disaster(House/centre evacuated and not usable)<br>
-		<input type="checkbox" id="MajorSystems3" value= "Substantial damage to property(House/centre evacuated and not usable)" class = hiddenForm>Substantial damage to property(House/centre evacuated and not usable)<br>
-		<input type="checkbox" id="MajorSystems4" value="Major utilities supply disruption to House/Centre/Region(House/centre evacuated and not usable)" class = hiddenForm>Major utilities supply disruption to House/Centre/Region(House/centre evacuated and not usable)<br>
+	<label id ="textMajorSystem" name = "Major Systems Affected" class = "hiddenText">Major systems Affected?
+		<input type="checkbox" id="MajorSystems1" name="Fire(House/centre evacuated and not usable)" value="Yes" class = hiddenForm>Fire(House/centre evacuated and not usable) 
+		<input type="checkbox" id="MajorSystems2" name="Natural disaster(House/centre evacuated and not usable)" value="Yes" class = hiddenForm>Natural disaster(House/centre evacuated and not usable)
+		<input type="checkbox" id="MajorSystems3" name="Substantial damage to property(House/centre evacuated and not usable)" value="Yes" class = hiddenForm>Substantial damage to property(House/centre evacuated and not usable)
+		<input type="checkbox" id="MajorSystems4" name="Major utilities supply disruption to House/Centre/Region(House/centre evacuated and not usable)" value="Yes" class = hiddenForm>Major utilities supply disruption to House/Centre/Region(House/centre evacuated and not usable)
 	</label>
 	
 	<p id ="textMedicationProblem" class = hiddenText>Medication Problem?</p>
-	<select id = "IncidentMedication" name = "Medication Problem" class = hiddenForm onchange=DynamicFuncL2(this.options[this.selectedIndex].value)>
-		<option value="Please Choose">Please Choose</option>
+	<select id = "IncidentMedication" name = "Medication Problem" class = hiddenForm disabled = true onchange=DynamicFuncL2(this.options[this.selectedIndex].value)>
+		<option value="Please Choose" selected disabled hidden>Please Choose</option>
 		<option value="Adverse reaction">Adverse Reaction</option>
 		<option value="Errors of administration">Errors of administration</option>
 		<option value="Errors of prescribing and dispensing">Errors of prescribing and dispensing</option>
@@ -372,8 +532,8 @@ function DynamicFuncL4(value){
 	</select>
 		
 	<p id ="textAdministrationErrorType" class = hiddenText>What form of error in administration?</p>	
-	<select id = "AdministrationErrorType" name = "Type of error in administration" class = hiddenForm>
-		<option value="Please Choose">Please Choose</option>
+	<select id = "AdministrationErrorType" name = "Type of error in administration" class = hiddenForm disabled = true>
+		<option value="Please Choose" selected disabled hidden>Please Choose</option>
 		<option value="Wrong drug">Wrong drug</option>
 		<option value="Wrong person">Wrong person</option>
 		<option value="Wrong dose">Wrong dose</option>
@@ -383,14 +543,14 @@ function DynamicFuncL4(value){
 
 
 	<select id = "IncidentVomiting/Diarrhoea" name = "People" disabled = true class = hiddenForm>
-		<option value="Please Choose">Please Choose</option>
+		<option value="Please Choose" selected disabled hidden>Please Choose</option>
 		<option value="One Person(severe)">One person(severe)</option>
 		<option value="More than two people with signs/symptoms">More than two people with signs/symptoms</option>
 	</select>
 
 <p id ="textSeizureType" name= "Type of seizure"class = hiddenText>Type of seizure?</p>	
 	<select id = "SeizureType" name = "Type of Seizure" disabled = true class = hiddenForm>
-		<option value="Please Choose">Please Choose</option>
+		<option value="Please Choose" selected disabled hidden>Please Choose</option>
 		<option value="Tonic Clonic">Tonic Clonic</option>
 		<option value="Absence">Absence</option>
 		<option value="Tonic">Tonic</option>
@@ -400,10 +560,9 @@ function DynamicFuncL4(value){
 		<option value="Complex Partial">Complex Partial</option>
 	</select>
 
-
 	<p id ="textSeizureDuration" name = "Seizure duration" class = hiddenText>Seizure duration</p>
 	<select id = "SeizureDuration" name = "Duration of Seizure" disabled = true class = hiddenForm>
-		<option value="Please Choose">Please Choose</option>
+		<option value="Please Choose" selected disabled hidden>Please Choose</option>
 		<option value="Less than 5 seconds">Less than 5 seconds</option>
 		<option value="5 - 10 seconds">5 - 10 seconds</option>
 		<option value="10 - 20 seconds">10 - 20 seconds</option>
@@ -419,7 +578,7 @@ function DynamicFuncL4(value){
 
 	<p id ="textSeizureTrigger" class = hiddenText>Seizure trigger</p>
 	<select id = "SeizureTrigger" name = "Trigger for Seizure" disabled = true class = hiddenForm>
-		<option value="Please Choose">Please Choose</option>
+		<option value="Please Choose" selected disabled hidden>Please Choose</option>
 		<option value="Activity">Activity</option>
 		<option value="Alcohol">Alcohol</option>
 		<option value="Coffee or Tea">Coffee or Tea</option>
@@ -441,7 +600,7 @@ function DynamicFuncL4(value){
 	
 	<p id ="textSeizureRecovery" class = hiddenText>Time to recover from seizure</p>
 	<select id = "SeizureRecovery" name = "Recovery time" disabled = true class = hiddenForm>
-		<option value="Please Choose">Please Choose</option>
+		<option value="Please Choose" selected disabled hidden>Please Choose</option>
 		<option value="Less than 15 minutes">Less than 15 minutes</option>
 		<option value="15 - 30 minutes">15 - 30 minutes</option>
 		<option value="30 - 60 minutes">30 - 60 minutes</option>
@@ -453,21 +612,280 @@ function DynamicFuncL4(value){
 	
 	<p id ="textSeizureInjury" class = hiddenText>Was there any injury?</p>
 	<select id = "SeizureInjury" name = "Was there any injury" disabled = true class = hiddenForm onchange=DynamicFuncL3(this.options[this.selectedIndex].value)>
-		<option value="Please Choose">Please Choose</option>
+		<option value="Please Choose" selected disabled hidden>Please Choose</option>
 		<option value="Yes">Yes</option>
 		<option value="No">No</option>
 	</select>
 
 	<p id ="textPainDiscomYesNo" class = hiddenText>Was there any injury?</p>
 	<select id = "PainDiscomYesNo" name = "Was there any injury" disabled = true class = hiddenForm onchange=DynamicFuncL3(this.options[this.selectedIndex].value)>
-		<option value="Please Choose">Please Choose</option>
+		<option value="Please Choose" selected disabled hidden>Please Choose</option>
+		<option value="Yes">Yes</option>
+		<option value="No">No</option>
+	</select>
+		
+	<p id ="textDiabetesBSL" class = hiddenText>Blood sugar level</p>
+	<select id = "DiabetesBSL" name = "Blood Sugar Level" disabled = true class = hiddenForm>
+		<option value="Please Choose" selected disabled hidden>Please Choose</option>
+		<option value="Blood sugar level above normal range(High)">Blood sugar level above normal range(High)</option>
+		<option value="Blood sugar level below normal range(Low)">Blood sugar level below normal range(Low)</option>
+	</select>
+	
+	<p id ="textDiabetesTreatment" class = hiddenText>Treatment for Diabetes</p>
+	<select id = "DiabetesTreatment" name = "Treatment for Diabetes" disabled = true class = hiddenForm>
+		<option value="Please Choose" selected disabled hidden>Please Choose</option>
+		<option value="Nil">Nil</option>
+		<option value="Administration of items from care plan(e.g. food, liquids, exercise)">Administration of items from care plan(e.g. food, liquids, exercise)</option>
+	</select>
+	
+	<!--BEHAVIOUR-->
+	
+	<p id = "textBehaviourWhatHappened" class = "hiddenText">What Happened</p>
+	<select id = "BehaviourWhatHappened" name="What Happened" hidden class=hiddenForm onchange=DynamicFuncL1(this.options[this.selectedIndex].value,this.id)>
+		<option value="Please Choose" selected disabled hidden>Please Choose</option>
+		<option value="Upset or agitated">Upset or agitated</option>
+		<option value="Verbal abuse">Verbal abuse</option>
+		<option value="Physical aggression against objects">Physical aggression against objects</option>
+		<option value="Physical aggression against self">Physical aggression against self</option>
+		<option value="Physical aggression against others">Physical aggression against others </option>
+		<option value="Sexual assault - Police involved">Sexual assault - Police involved</option>
+		<option value="Inappropriate sexual behaviour(including verbalisation)">Inappropriate sexual behaviour(including verbalisation)</option>
+		<option value="Stripping">Stripping</option>
+		<option value="Near miss or attempt">Near miss or attempt</option>
+		<option value="Disturbance to and from members of public">Disturbance to and from members of public</option>
+		<option value="Away from setting(absconding)">Away from setting(absconding)</option>
+		<option value="Inappropriate urination/defecation">Inappropriate urination/defecation</option>
+		<option value="Insomnia">Insomnia</option>
+		<option value="Faecal/body fluid smearing">Faecal/body fluid smearing</option>
+		<option value="Weapon used">Weapon used</option>
+		<option value="Inappropriate behaviour">Inappropriate behaviour</option>
+		<option value="Food">Food</option>
+		<option value="Threatening behaviour">Threatening behaviour</option>
+	</select>
+	
+	<p id = "textBehaviourDetails" class = "hiddenText">In what regard?</p>
+	<select id = "BehaviourUpset"class = "hiddenForm">
+		<option value="Please Choose" selected disabled hidden>Please Choose</option>
+		<option value="Crying/Venting">Crying/Venting</option>
+		<option value="Hand wringing">Hand wringing</option>
+		<option value="Pacing, inability to be still">Pacing, inability to be still</option>
+		<option value="Screaming/Yelling, making loud noises">Screaming/Yelling, making loud noises</option>
+		<option value="Tense facial expression/body language">Tense facial expression/body language</option>
+	</select>
+
+	<select id = "BehaviourVerbal"class = "hiddenForm">
+		<option value="Please Choose" selected disabled hidden>Please Choose</option>
+		<option value="Personal insults at others">Personal insults at others</option>
+		<option value="Swearing, foul language">Swearing, foul language</option>
+		<option value="Violent threats towards self or others">Violent threats towards self or others</option>
+	</select>
+
+	<select id = "BehaviourPhysicalAgainstObject"class = "hiddenForm">
+		<option value="Please Choose" selected disabled hidden>Please Choose</option>
+		<option value="Slams doors, scatters object, makes a mess">Slams doors, scatters object, makes a mess</option>
+		<option value="Throws objects dangerously, punches/kicks furniture or walls">Throws objects dangerously, punches/kicks furniture or walls</option>
+		<option value="Break objects smashes windows">Breaks objects, smashes windows</option>
+	</select>
+
+<!--Show if Physical Aggression against self is selected -->
+	<select id = "BehaviourPhysicalAgainstSelf"class = "hiddenForm">
+		<option value="Please Choose" selected disabled hidden>Please Choose</option>
+		<option value="Bangs head, hits fists onto objects, throws self(uninjured)">Bangs head, Hits fists onto objects, Throws self(Uninjured)</option>
+		<option value="Causes serious injury to self">Causes serious injury to self</option>
+		<option value="Inflicts superficial cuts of bruises, minor burns etc">Inflicts superficial cuts or bruises, minor burns etc</option>
+		<option value="Picks, scratches skin, pulls hair, hits, bites self">Picks, scratches skin, pulls hair, hits, bites self</option>
+	</select>
+
+	<!--Show if Physical Aggression against others is selected -->
+	<select id = "BehaviourPhysicalAgainstOther"class = "hiddenForm">
+		<option value="Please Choose" selected disabled hidden>Please Choose</option>
+		<option value="Bruises, causes sprains,welts etc to others">Bruises, causes sprains, welts etc to others</option>
+		<option value="Strikes, kicks, punches, pulls hair, bites, pushes">Strikes, kicks, punches, pulls hair, bites, pushes</option>
+		<option value="Swings grabs at people, clear threatening gestures">Swings, grabs at people, clear threatening gestures</option>
+
+	</select>
+
+	<!--Show if Food is selected -->
+	<select id = "BehaviourFood"class = "hiddenForm">
+		<option value="Please Choose" selected disabled hidden>Please Choose</option>
+		<option value="Food obsessive">Food Obsessive</option>
+		<option value="Prader Willi Syndrome">Prader Willi Syndrome</option>
+	</select>
+
+	<p id ="textWhatHappenedComment" class = hiddenText>Comment on what happened</p>
+	<input type="text" id="WhatHappenedComment" name="Comments on what happened" disabled = true class = hiddenForm></input>
+	
+	<p id ="textBehavourInjured" class = hiddenText>Was the person injured</p>
+	<select id="BehaviourInjuredYesNo" name="Was the person injured" disabled = true class = hiddenForm>
+		<option value="Please Choose" selected disabled hidden>Please Choose</option>
 		<option value="Yes">Yes</option>
 		<option value="No">No</option>
 	</select>
 	
+	<p id ="textBehavStaffResponse" class = hiddenText>Staff Response</p>
+	<!--NOTE behaviour staff response includes physical restraint, not present in others -->
+	<select id = "BehaviourStaffResponse" name="Staff response" disabled = true class = hiddenForm onchange=generalEndFunc(this.options[this.selectedIndex].value,this.id)>
+		<option value="Please Choose" selected disabled hidden>Please Choose</option>
+		<option value="Called for assistance">Called for assistance</option>
+		<option value="Interruption/blocking">Interruption/blocking</option>
+		<option value="Nothing/Planned ignoring">Nothing/Planned ignoring</option>
+		<option value="Physical discomfort relieved">Physical discomfort relieved</option>
+		<option value="Continued activity">Continued activity</option>
+		<option value="Task/Activity removed">Task/Activity removed</option>
+		<option value="Given item/Activity person wanted">Given item/Activity person wanted</option>
+		<option value="Given item, activity or attention(neutral)">given item, activity or attention (neutral)</option>
+		<option value="Verbal redirection to activity">Verbal redirection to activity</option>
+		<option value="Physical redirection to activity(with gentle physical guidance)">Physical redirection to activity(with gentle physical guidance)</option>
+		<option value="Redirection to a different area(not forced)">Redirection to a different area(not forced)</option>
+		<option value="Removal of other service users from the area(not forced)">Removal of other service users from the area(not forced)</option>
+		<option value="Physical restraint">Physical restraint</option>
+		<option value="Police involvement">Police involvement</option>
+		<option value="PRN">PRN</option>
+		<option value="Other">Other</option>
+	</select>
+	
+	<!--Restraint SECTION -->
+	<p id ="textRestraintBSP"class = "hiddenText">Does the person have BSP?</p>
+	<select id = "RestraintBSPYesNo" name="Does the person have BSP" disabled class=hiddenForm>
+		<option value="Please Choose" selected hidden disabled>Please Choose</option>
+		<option value="Yes">Yes</option>
+		<option value="No">No</option>
+	</select>
+	<p id ="textRestraintDesiredOutcome"  class = "hiddenText">What was the desired outcome of the restraint?</p>
+	<input type="text" id ="RestraintDesiredOutcome" name="Desired Outcome of Restraint" disabled class = "hiddenForm">
+	<p id = "textRestraintAlternatives" class = "hiddenText">What alternative interventions were attempted before Restraint?</p>
+	<input type="text" id ="RestraintAlternatives" name="Restraint Alternatives" disabled class = "hiddenForm">
+	
+	<p id = "textRestraintTypes"class = "hiddenText">Type of Restraint/s used?</p>
+	<label id ="labelRestraintCheckboxes" name = "Restraint" class = "hiddenText">
+		<input type="checkbox" id="RestraintOnePersonVehicle" name="One person(In vehicle)" value="Yes" class = hiddenForm onchange=restraintDynamicFunc(this.id,0)>One Person(In vehicle)
+		<input type="checkbox" id="RestraintOnePersonEscort" name="One person escort" value="Yes" class = hiddenForm onchange=restraintDynamicFunc(this.id,0)>One person escort
+		<input type="checkbox" id="RestraintOnePersonSitting" name="One person sitting" value="Yes" class = hiddenForm onchange=restraintDynamicFunc(this.id,0)>One person sitting
+		<input type="checkbox" id="RestraintTwoPersonEscort" name="Two person escort" value="Yes" class = hiddenForm onchange=restraintDynamicFunc(this.id,0)>Two person escort
+		<input type="checkbox" id="RestraintTwoPersonSitting" name="Two person sitting" value="Yes" class = hiddenForm onchange=restraintDynamicFunc(this.id,0)> Two person sitting
+	</label>
+	
+	<p id = "textRestraintOnePersonVehicleDur"class = "hiddenText">One person(In vehicle) duration</p>
+	<select id ="RestraintOnePersonVehicleDur" name ="One person in vehicle duration" disabled class=hiddenForm>
+		<option value ="Please Choose" selected hidden disabled>Please Choose</option>
+		<option value ="5-10 seconds">5-10 seconds</option>
+		<option value ="10-20 seconds">10-20 seconds</option>
+		<option value ="20-40 seconds">20-40 seconds</option>
+		<option value ="40-60 seconds">40-60 seconds</option>
+		<option value ="1-2 minutes">1-2 minutes</option>
+		<option value ="2-3 minutes">2-3 minutes</option>
+		<option value ="3-4 minutes">3-4 minutes</option>
+		<option value ="4-5 minutes">4-5 minutes</option>
+		<option value ="5-10 minutes">5-10 minutes</option>
+		<option value ="more than 10 minutes">more than 10 minutes</option>
+	</select>
+	
+	<p id = "textRestraintOnePersonVehicleComments" class = "hiddenText">Comments on restraint one person(in vehicle)</p>
+	<input type="text" id ="RestraintOnePersonVehicleComments" name="One Person in Vehicle Comments" disabled class = "hiddenForm">
+
+	<p id = "textRestraintOnePersonEscortDur"class = "hiddenText">One person escort duration</p>
+	<select id ="RestraintOnePersonEscortDur" name ="One person escort duration" disabled class="hiddenForm">
+		<option value ="Please Choose" selected hidden disabled>Please Choose</option>
+		<option value ="5-10 seconds">5-10 seconds</option>
+		<option value ="10-20 seconds">10-20 seconds</option>
+		<option value ="20-40 seconds">20-40 seconds</option>
+		<option value ="40-60 seconds">40-60 seconds</option>
+		<option value ="1-2 minutes">1-2 minutes</option>
+		<option value ="2-3 minutes">2-3 minutes</option>
+		<option value ="3-4 minutes">3-4 minutes</option>
+		<option value ="4-5 minutes">4-5 minutes</option>
+		<option value ="5-10 minutes">5-10 minutes</option>
+		<option value ="more than 10 minutes">more than 10 minutes</option>
+	</select>
+	
+	<p id = "textRestraintOnePersonEscortComments" class = "hiddenText">Comments on restraint one person escort</p>
+	<input type="text" id ="RestraintOnePersonEscortComments" name="One Person Escort Comments" disabled class = "hiddenForm">
+
+
+	<p id = "textRestraintOnePersonSittingDur"class = "hiddenText">One person sitting duration</p>
+	<select id ="RestraintOnePersonSittingDur" name ="One person sitting duration" disabled class="hiddenForm">
+		<option value ="Please Choose" selected hidden disabled>Please Choose</option>
+		<option value ="5-10 seconds">5-10 seconds</option>
+		<option value ="10-20 seconds">10-20 seconds</option>
+		<option value ="20-40 seconds">20-40 seconds</option>
+		<option value ="40-60 seconds">40-60 seconds</option>
+		<option value ="1-2 minutes">1-2 minutes</option>
+		<option value ="2-3 minutes">2-3 minutes</option>
+		<option value ="3-4 minutes">3-4 minutes</option>
+		<option value ="4-5 minutes">4-5 minutes</option>
+		<option value ="5-10 minutes">5-10 minutes</option>
+		<option value ="more than 10 minutes">more than 10 minutes</option>
+	</select>
+	
+	<p id = "textRestraintOnePersonSittingComments" class = "hiddenText">Comments on restraint one person sitting</p>
+	<input type="text" id ="RestraintOnePersonSittingComments" name="One Person Sitting Comments" disabled class = "hiddenForm">
+
+	
+	<p id = "textRestraintTwoPersonEscortDur"class = "hiddenText">Two person escort duration</p>
+	<select id ="RestraintTwoPersonEscortDur" name ="Two person escort duration" disabled class=hiddenForm>
+		<option value ="Please Choose" selected hidden disabled>Please Choose</option>
+		<option value ="5-10 seconds">5-10 seconds</option>
+		<option value ="10-20 seconds">10-20 seconds</option>
+		<option value ="20-40 seconds">20-40 seconds</option>
+		<option value ="40-60 seconds">40-60 seconds</option>
+		<option value ="1-2 minutes">1-2 minutes</option>
+		<option value ="2-3 minutes">2-3 minutes</option>
+		<option value ="3-4 minutes">3-4 minutes</option>
+		<option value ="4-5 minutes">4-5 minutes</option>
+		<option value ="5-10 minutes">5-10 minutes</option>
+		<option value ="more than 10 minutes">more than 10 minutes</option>
+	</select>
+	
+		<p id = "textRestraintTwoPersonEscortComments" class = "hiddenText">Comments on restraint two person escort</p>
+	<input type="text" id ="RestraintTwoPersonEscortComments" name="Two Person Escort Comments" disabled class =hiddenForm>
+
+	
+	<p id = "textRestraintTwoPersonSittingDur"class = "hiddenText">Two person sitting duration</p>
+	<select id ="RestraintTwoPersonSittingDur" name ="Two person sitting duration" disabled class=hiddenForm>
+		<option value ="Please Choose" selected hidden disabled>Please Choose</option>
+		<option value ="5-10 seconds">5-10 seconds</option>
+		<option value ="10-20 seconds">10-20 seconds</option>
+		<option value ="20-40 seconds">20-40 seconds</option>
+		<option value ="40-60 seconds">40-60 seconds</option>
+		<option value ="1-2 minutes">1-2 minutes</option>
+		<option value ="2-3 minutes">2-3 minutes</option>
+		<option value ="3-4 minutes">3-4 minutes</option>
+		<option value ="4-5 minutes">4-5 minutes</option>
+		<option value ="5-10 minutes">5-10 minutes</option>
+		<option value ="more than 10 minutes">more than 10 minutes</option>
+	</select>
+	
+	<p id = "textRestraintTwoPersonSittingComments" class = "hiddenText">Comments on restraint two person sitting</p>
+	<input type="text" id ="RestraintTwoPersonSittingComments" name="Two Person Sitting Comments" disabled class =hiddenForm>
+
+	<p id = "textRestraintObservations" class = "hiddenText">Observations during restraint</p>
+	<input type="text" id ="RestraintObservations" name="Observations during restraint" disabled class = "hiddenForm">
+
+	<p id = "textRestraintOutcome" class = "hiddenText">Outcome of restraint</p>
+	<input type="text" id ="RestraintOutcome" name="Outcome of restraint" disabled class =hiddenForm>
+	
+	<p id = "textRestraintSupport"class = "hiddenText">Did you offer/provide any support</p>
+	<select id ="RestraintSupportYesNo" name ="Did you offer/provide any support to the person" disabled class=hiddenForm onchange=restraintDynamicFunc(this.id,this.options[this.selectedIndex].value)>
+		<option value ="Please Choose" selected hidden disabled>Please Choose</option>
+		<option value ="Yes">Yes</option>
+		<option value ="No">No</option>
+	</select>	
+	
+	<p id = "textRestraintSupportDetails" class = "hiddenText">Details</p>
+	<input type="text" id ="RestraintSupportDetails" name="Comments on support given" disabled class =hiddenForm>
+	
+	<p id = "textRestraintInjured"class = "hiddenText">Was the person injured as a result of the restraint</p>
+	<select id ="RestraintInjuredYesNo" name ="Injury as a result of the restraint" disabled class=hiddenForm onchange=restraintDynamicFunc(this.id,this.options[this.selectedIndex].value)>
+		<option value ="Please Choose" selected hidden disabled>Please Choose</option>
+		<option value ="Yes">Yes</option>
+		<option value ="No">No</option>
+	</select>	
+
+
+	<!-- General ends from here-->
 	<p id ="textNatureOfInjury" class = hiddenText>Nature of injury?</p>
 	<select id = "NatureOfInjury" name = "Nature of Injury" disabled = true class = hiddenForm>
-		<option value="Please Choose">Please Choose</option>
+		<option value="Please Choose" selected disabled hidden>Please Choose</option>
 		<option value="Nil injury">Nil injury</option>
 		<option value="Amputation">Amputation</option>
 		<option value="Broken Teeth">Broken Teeth</option>
@@ -495,7 +913,7 @@ function DynamicFuncL4(value){
 		
 	<p id ="textPartAffected" class = hiddenText>What body part was affected?</p>	
 	<select id = "PartAffected" name = "Part Affected" disabled = true class=hiddenForm>
-		<option value="Please Choose">Please Choose</option>
+		<option value="Please Choose" selected disabled hidden>Please Choose</option>
 		<option value="Not Applicable">Not Applicable</option>
 		<option value="Abdomen/Stomach">Abdomen/Stomach</option>
 		<option value="Ankle">Ankle</option>
@@ -531,33 +949,16 @@ function DynamicFuncL4(value){
 	
 	<p id ="textSideOfBody" class = hiddenText>What side of the body was affected?</p>
 	<select id = "SideOfBody" name = "Side of body affected" disabled = true class = hiddenForm>
-		<option value="Please Choose">Please Choose</option>
+		<option value="Please Choose" selected disabled hidden>Please Choose</option>
 		<option value="Left">Left</option>
 		<option value="Right">Right</option>
 		<option value="Left and Right">Left and Right</option>
 		<option value="Not Applicable">Not Applicable</option>
 	</select>	
-	
-	
-	<p id ="textDiabetesBSL" class = hiddenText>Blood sugar level</p>
-	<select id = "DiabetesBSL" name = "Blood Sugar Level" disabled = true class = hiddenForm>
-		<option value="Please Choose">Please Choose</option>
-		<option value="Blood sugar level above normal range(High)">Blood sugar level above normal range(High)</option>
-		<option value="Blood sugar level below normal range(Low)">Blood sugar level below normal range(Low)</option>
-	</select>
-	
-	<p id ="textDiabetesTreatment" class = hiddenText>Treatment for Diabetes</p>
-	<select id = "DiabetesTreatment" name = "Treatment for Diabetes" disabled = true class = hiddenForm>
-		<option value="Please Choose">Please Choose</option>
-		<option value="Nil">Nil</option>
-		<option value="Administration of items from care plan(e.g. food, liquids, exercise)">Administration of items from care plan(e.g. food, liquids, exercise)</option>
-	</select>
-	
-	<!-- General ends from here-->
-	
+		
 	<p id ="textTreatment" class = hiddenText>Treatment</p>
-	<select id = "Treatment" name="Treatment" disabled = true class = hiddenForm onchange =treatmentFunc(this.options[this.selectedIndex].value)>
-		<option value="Please Choose">Please Choose</option>
+	<select id = "Treatment" name="Treatment" disabled = true class = hiddenForm onchange =generalEndFunc(this.options[this.selectedIndex].value,this.id)>
+		<option value="Please Choose" selected disabled hidden>Please Choose</option>
 		<option value="Nil treatment">Nil treatment</option>
 		<option value="Counselled/Reassured">Counselled/Reassured</option>
 		<option value="First aid given at home">First aid given at home</option>
@@ -569,22 +970,21 @@ function DynamicFuncL4(value){
 		<option value="PRN">PRN</option>
 	</select>	
 
-	<p id ="textAdmissionTime" class = hiddenText>Admission Time?</p>
-	<input type = "text" id ="AdmissionTime" name = "Admission time" class = hiddenForm></input>
-	
 	<p id ="textAdmissionDate" class = hiddenText>Admission Date?</p>
-	<input type = "date" id ="AdmissionDate" class = hiddenForm></input>
+	<input type = "date" id ="AdmissionDate" disabled = true class = hiddenForm></input>
+	
+	<p id ="textAdmissionTime" class = hiddenText>Admission Time?</p>
+	<input type = "time" id ="AdmissionTime" name = "Admission time" disabled = true class = hiddenForm></input>
+	
+	<p id ="textDischargeDate" class = hiddenText>Discharge Date?</p>
+	<input type = "date" id ="DischargeDate" disabled = true class = hiddenForm></input>
 	
 	<p id ="textDischargeTime" class = hiddenText>Discharge Time?</p>
-	<input type = "text" id ="DischargeTime" name = "Discharge time" class = hiddenForm></input>
-	
-	<p id ="textPRN" class = hiddenText>PRN Name/Dosage</p>
-	<input type = "text" id ="PRN" name = "PRN/DOsage" class = hiddenForm></input>
-	
-	
-	<p id ="textStaffResponse" class = hiddenText>Staff Response</p>
-	<select id="StaffResponse" name="Staff response" disabled = true class = hiddenForm>
-		<option value="Please Choose">Please Choose</option>
+	<input type = "time" id ="DischargeTime" name = "Discharge time" disabled = true class = hiddenForm></input>
+		
+	<p id ="textStaffResponse" class = hiddenText>Staff Response</p>	
+	<select id = "StaffResponse" name="Staff response" disabled = true class = hiddenForm onchange=generalEndFunc(this.options[this.selectedIndex].value,this.id)>
+		<option value="Please Choose" selected disabled hidden>Please Choose</option>
 		<option value="Called for assistance">Called for assistance</option>
 		<option value="Interruption/blocking">Interruption/blocking</option>
 		<option value="Nothing/Planned ignoring">Nothing/Planned ignoring</option>
@@ -597,27 +997,29 @@ function DynamicFuncL4(value){
 		<option value="Physical redirection to activity(with gentle physical guidance)">Physical redirection to activity(with gentle physical guidance)</option>
 		<option value="Redirection to a different area(not forced)">Redirection to a different area(not forced)</option>
 		<option value="Removal of other service users from the area(not forced)">Removal of other service users from the area(not forced)</option>
-		<option value = "Physical restraint">Physical restraint</option>
 		<option value="Police involvement">Police involvement</option>
-		<option value= "PRN">PRN</option>
+		<option value="PRN">PRN</option>
 		<option value="Other">Other</option>
 	</select>
+
 	
+	<p id ="textPRN" class = hiddenText>PRN Name/Dosage</p>
+	<input type = "text" id ="PRN" name = "PRN/Dosage" disabled = true class = hiddenForm></input>
+			
 	<p id ="textOtherInfo" class = hiddenText>Other Information</p>
 	<input type="text" id="OtherInfo" name="Other Information" disabled = true class = hiddenForm></input>
 	
 	<p id ="textCoordContacted" class = hiddenText>Has a Serivce/On-call Coordinator been contacted</p>
 	<select id="CoordContactedYesNo" name="Coordinator Contacted" disabled = true class = hiddenForm>
-		<option value="Please Choose">Please Choose</option>
+		<option value="Please Choose" selected disabled hidden>Please Choose</option>
 		<option value="Yes">Yes</option>
 		<option value="No">No</option>
 	</select>
+	
+	<br>
 	<input type="submit">
 
 </form>
-
-
-
 
 </body>
 </html>
