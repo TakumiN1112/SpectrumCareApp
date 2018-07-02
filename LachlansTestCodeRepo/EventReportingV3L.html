@@ -33,6 +33,7 @@ function displayNext(elementArray){
 	//	console.log("add " + elementArray[itt]);
 		document.getElementById(elementArray[itt]).disabled = false;
 		document.getElementById(elementArray[itt]).style.display = "block";	
+
 	}
 }
 
@@ -43,7 +44,7 @@ function IABSelectionFunc(value){
 	//collapseAccident
 	collapseElements(["AccidentType", "textAccidentType"]);
 	//CollapseBehaviour
-	collapseElements(["textBehaviourWhatHappened","BehaviourWhatHappened","textWhatHappenedComment","WhatHappenedComment","textBehavourInjured", "BehaviourInjuredYesNo","BehaviourStaffResponse","textBehavStaffResponse"]);
+	collapseElements(["textBehaviourWhatHappened","BehaviourWhatHappened","textWhatHappenedComment","WhatHappenedComment","textBehavourInjured", "BehaviourInjuredYesNo","BehaviourStaffResponse","textBehavStaffResponse","textTreatment", "Treatment"]);
 	
 	if(value == "Incident"){	
 		displayNext(["IncidentWhatHappened","textWhatHappened","Treatment","textTreatment","StaffResponse","textStaffResponse", "OtherInfo", "textOtherInfo", "CoordContactedYesNo", "textCoordContacted"]);
@@ -53,7 +54,7 @@ function IABSelectionFunc(value){
 
 	}
 	else if(value == "Behaviour"){
-		displayNext(["textBehaviourWhatHappened","BehaviourWhatHappened","textWhatHappenedComment","WhatHappenedComment","BehaviourStaffResponse","textBehavStaffResponse","textOtherInfo", "OtherInfo", "textCoordContacted","CoordContactedYesNo", "textBehavourInjured", "BehaviourInjuredYesNo"]);
+		displayNext(["textBehaviourWhatHappened","BehaviourWhatHappened","textWhatHappenedComment","WhatHappenedComment","BehaviourStaffResponse","textBehavStaffResponse","textOtherInfo", "OtherInfo", "textCoordContacted","CoordContactedYesNo", "textBehavourInjured", "BehaviourInjuredYesNo", "textTreatment", "Treatment"]);
 	}
 	
 }
@@ -69,7 +70,7 @@ function DynamicFuncL1(value,changedElement){
 		collapseElements(["textIncInjury","AbuseInjuryYesNo"]);
 	}
 	
-	collapseElements(["FinancialAmount", "textFinancialAmount","textCommunityAgencies","FireServiceCheckbox","PoliceCheckbox", "AmbulanceCheckbox","textSpectrumCareDepartments", "ServiceDeliveryCheckbox", "HomesofChoiceCheckbox", "QualityandRiskCheckbox", "HRCheckbox", "textMajorSystem", "MajorSystems1", "MajorSystems2", "MajorSystems3", "MajorSystems4","IncidentMedical", "textIncidentMedical", "IncidentMedication", "textMedicationProblem", "AdmissionDate", "AccidentVehicleTreatment", "textAccidentVehicleTreatment"]);
+	collapseElements(["FinancialAmount", "textFinancialAmount","divCommunityAgencies","divSpectrumCareDepartments", "divMajorSystem","IncidentMedical", "textIncidentMedical", "IncidentMedication", "textMedicationProblem", "AdmissionDate", "AccidentVehicleTreatment", "textAccidentVehicleTreatment"]);
 //INCIDENT
 	//What Happened
 	if(changedElement == "IncidentWhatHappened"){
@@ -83,10 +84,10 @@ function DynamicFuncL1(value,changedElement){
 			displayNext(["NatureOfInjury","textNatureOfInjury","PartAffected","textPartAffected","SideOfBody","textSideOfBody"]);
 		}
 		else if(value == "Major event involving multiple community agencies or Spectrum Care departments"){
-			displayNext(["textCommunityAgencies","FireServiceCheckbox","PoliceCheckbox", "AmbulanceCheckbox","textSpectrumCareDepartments", "ServiceDeliveryCheckbox", "HomesofChoiceCheckbox", "QualityandRiskCheckbox", "HRCheckbox"]);
+			displayNext(["divCommunityAgencies","divSpectrumCareDepartments"]);
 		}
 		else if(value == "Major systems failure"){
-			displayNext(["textMajorSystem", "MajorSystems1", "MajorSystems2", "MajorSystems3", "MajorSystems4"]);
+			displayNext(["divMajorSystem"]);
 		
 		}
 		else if(value == "Medical"){
@@ -327,7 +328,7 @@ function restraintDynamicFunc(changedElement,value){
 
 
 <!-- give all input sections a short ID and a name. The name will be used for the message in the PHP script-->
-<form id ="formMain" name = "formMain" action="PHPtest.php" method="post" >
+<form id ="formMain" name = "formMain" action="EmailAlertsV2.php" method="post" >
 <!--General  -->
 	<p id ="textPersonSupported" class = labelText>Name of Person Supported</p>
 	<input type="text" id="PersonSupported" name="Name of Person Supported" class = displayedForm></input>
@@ -358,6 +359,7 @@ function restraintDynamicFunc(changedElement,value){
 		<option value="House-Outdoors">House-Outdoors</option>
 		<option value="In Vehcile-Parked">In Vehcile-Parked</option>
 		<option value="In Vehicle-Travelling">In Vehicle-Travelling</option>
+		<optgroup label="" hidden disabled></optgroup>
 	</select>
 
 	<p id ="textPeopleInvolved" class = labelText>Who was involved</p>
@@ -370,6 +372,7 @@ function restraintDynamicFunc(changedElement,value){
 		<option value="Person/Public">Person/Public</option>
 		<option value="Family">Family</option>
 		<option value="Other">Other</option>
+		<optgroup label="" hidden disabled></optgroup>
 	</select>
 
 	<p id ="textPeopleNumberInvolved" class = hiddenText>Number of other people Involved</p>
@@ -399,25 +402,27 @@ function restraintDynamicFunc(changedElement,value){
 		<option value="Recent medication change">Recent Medication Change</option>
 		<option value="Seemed unsettled or agitated">Seemed unsettled or agitated</option>
 		<option value="Other">Other</option>
+		<optgroup label="" hidden disabled></optgroup>
 	</select>
 
 	<p id ="textEventCauseComments" class = labelText>Comments about what happened before the event</p>
 	<input type="text" id="EventCauseCommentsNotRequired" name="Comments on cause of event" class = displayedForm></input>
 	<input type="text" id="EventCauseCommentsRequired" name="Comments on cause of event" disabled hidden required class = hiddenForm></input>
 
-	<p id ="textIABGeneral" class = labelText>Event Type</p>
-	<select id ="IABGeneral" name="Event Type" onchange =IABSelectionFunc(this.options[this.selectedIndex].value)>
+	<p id ="textIABGeneral" required class =labelText>Event Type</p>
+	<select id ="IABGeneral" name="Event Type" class=displayedForm onchange =IABSelectionFunc(this.options[this.selectedIndex].value)>
 		<option value="Please Choose" selected disabled hidden>Please Choose</option>
 		<option value="Incident">Incident</option>
 		<option value="Accident">Accident</option>
 		<option value="Behaviour">Behaviour </option>
+		<optgroup label="" hidden disabled></optgroup>
 	</select>
 	
 	
 <!-- INCIDENT -->
 
-<p id ="textWhatHappened" class = hiddenText>What Happened</p>
-	<select id = "IncidentWhatHappened" name="What Happened" class = hiddenForm disabled = true onchange=DynamicFuncL1(this.options[this.selectedIndex].value,this.id)>
+<p id ="textWhatHappened" required class = hiddenText>What Happened</p>
+	<select id = "IncidentWhatHappened" name="What Happened" required class = hiddenForm onchange=DynamicFuncL1(this.options[this.selectedIndex].value,this.id)>
 		<option value="Please Choose" selected disabled hidden >Please Choose</option>
 		<option value="Assault, Abuse or Neglect">Assault, Abuse or Neglect</option>
 		<option value="Death(unexpected)">Death(unexpected)</option>
@@ -430,10 +435,11 @@ function restraintDynamicFunc(changedElement,value){
 		<option value="Near miss">Near Miss</option>
 		<option value="Property damage">Property Damage</option>
 		<option value="Tools/Appliances">Tools/Appliances</option>
+		<optgroup label="" hidden disabled></optgroup>		
 	</select>
 
 	<p id ="textAccidentType" name ="Type of Accident" class = hiddenText>Type of Accident</p>
-	<select id = "AccidentType" name = "Accident Type" class = hiddenForm disabled = true onchange=DynamicFuncL1(this.options[this.selectedIndex].value,this.id)>
+	<select id = "AccidentType" name = "Accident Type" required class = hiddenForm onchange=DynamicFuncL1(this.options[this.selectedIndex].value,this.id)>
 		<option value="Please Choose" selected disabled hidden>Please Choose</option>
 		<option value="Accident">Accident</option>
 		<option value="Fall/Trip/Slip">Fall/Trip/Slip</option>
@@ -441,6 +447,7 @@ function restraintDynamicFunc(changedElement,value){
 		<option value="Serious harm injury involved">Serious harm injury involved</option>
 		<option value="Unknown/Unwitnessed injury">Unknown/Unwitnessed injury</option>
 		<option value="Vehicle - involving person">Vehicle - involving person</option>
+		<optgroup label="" hidden disabled></optgroup>
 	</select>
 	
 	<p id ="textAccidentVehicleTreatment" class = hiddenText disabled = true>Vehicle Accident Treatment</p>
@@ -449,6 +456,7 @@ function restraintDynamicFunc(changedElement,value){
 		<option value="Hospitalisation less than 48 hours">Hospitalisation less than 48 hours</option>
 		<option value="A&E treatment">A&E treatment</option>
 		<option value="Hospitalisation greater than 48 hours">Hospitalisation greater than 48 hours</option>
+		<optgroup label="" hidden disabled></optgroup>
 	</select>
 	
 	<p id ="textIncidentMedical" name = "Medical Problem" class = hiddenText>Medical Problem</p>
@@ -474,6 +482,7 @@ function restraintDynamicFunc(changedElement,value){
 		<option value="Unknown/Unwitnessed injury">Unknown/Unwitnessed injury</option>
 		<option value="Vomiting and has signs of blood present">Vomiting and has signs of blood present</option>
 		<option value="Vomiting/Diarrhoea">Vomiting/Diarrhoea</option>
+		<optgroup label="" hidden disabled></optgroup>
 	</select>
 	
 	<p id ="textChokingHarm" name = "Harm from choking" class = hiddenText>level of harm?</p>
@@ -483,6 +492,7 @@ function restraintDynamicFunc(changedElement,value){
 		<option value="Temporary harm(e.g. scratched throat)">Temporary harm(e.g. scratched throat)</option>
 		<option value="Permanent harm(e.g.Brain damage)">Permanent harm(e.g. Brain damage)</option>
 		<option value="Death">Death</option>
+		<optgroup label="" hidden disabled></optgroup>
 	</select>
 	
 	<p id ="textIncInjury" class = hiddenText>Was there any injury?</p>
@@ -490,36 +500,53 @@ function restraintDynamicFunc(changedElement,value){
 		<option value="Please Choose" selected disabled hidden>Please Choose</option>
 		<option value="Yes">Yes</option>
 		<option value="No">No</option>
+		<optgroup label="" hidden disabled></optgroup>
 	</select>	
+	
 	
 	<p id ="textFinancialAmount" class = hiddenText>Amount Involved?</p>
 	<select id = "FinancialAmount" name ="Amount Involved" disabled = true class = hiddenForm>
 		<option value="Please Choose" selected disabled hidden>Please Choose</option>
 		<option value="Less than $20.00">Less than $20.00</option>
 		<option value="More than $20.00">More than $20.00</option>
+		<optgroup label="" hidden disabled></optgroup>
 	</select>
 
 	<!-- CHECKBOXES need fixing for formatting-->
-	<label id="textCommunityAgencies" class = hiddenText><br>Community Agencies:
+	<div id="divCommunityAgencies" class ="hiddenText"><br>
+		Community Agencies:
 		<br>
-		<input type="checkbox" id = "FireServiceCheckbox" name = "Fire Service" value="Yes" class = hiddenForm >Fire Service
-		<input type="checkbox" id = "PoliceCheckbox" name = "Police" value="Yes" class = hiddenForm>Police<br>
-		<input type="checkbox" id = "AmbulanceCheckbox" name = "Ambulance" value="Yes" class = hiddenForm>Ambulance<br>
-	</label>
-	<label id="textSpectrumCareDepartments" class = hiddenText>Spectrum Care Departments:
+		<input type="checkbox" id = "FireServiceCheckbox" name = "Fire Service" value="Yes">
+			<label for="FireServiceCheckbox">Fire Service</label><br>
+		<input type="checkbox" id = "PoliceCheckbox" name = "Police" value="Yes">
+			<label for="PoliceCheckbox">Police</label><br>
+		<input type="checkbox" id = "AmbulanceCheckbox" name = "Ambulance" value="Yes">
+			<label for="AmbulanceCheckbox">Ambulance</label><br>
+	</div>
+	<div id="divSpectrumCareDepartments" class = hiddenText>Spectrum Care Departments:
 		<br>
-		<input type="checkbox" id = "ServiceDeliveryCheckbox" name = "Service Delivery" value="Yes" class = hiddenForm>Service Delivery<br>
-		<input type="checkbox" id = "HomesofChoiceCheckbox" name = "Homes of Choice" value="Yes" class = hiddenForm>Homes of Choice<br>
-		<input type="checkbox" id = "QualityandRiskCheckbox" name = "Quality and Risk" value="Yes" class = hiddenForm>Quality and Risk<br>
-		<input type="checkbox" id = "HRCheckbox" name = "HR">HR<br>
-	</label>
+		<input type="checkbox" id = "ServiceDeliveryCheckbox" name = "Service Delivery" value="Yes">
+			<label for="SerivceDeliveryCheckbox">Serivce Delivery</label><br>
+		<input type="checkbox" id = "HomesofChoiceCheckbox" name = "Homes of Choice" value="Yes">
+			<label for="HomesofChoiceCheckbox">Homes of Choice</label><br>
+		<input type="checkbox" id = "QualityandRiskCheckbox" name = "Quality and Risk" value="Yes">
+			<label for="QualityandRiskCheckbox">Quality and Risk</label><br>
+		<input type="checkbox" id = "HRCheckbox" name = "HR" value="Yes">
+			<label for="HRCheckbox">HR</label><br>
+	</div>
 		
-	<label id ="textMajorSystem" name = "Major Systems Affected" class = "hiddenText">Major systems Affected?
-		<input type="checkbox" id="MajorSystems1" name="Fire(House/centre evacuated and not usable)" value="Yes" class = hiddenForm>Fire(House/centre evacuated and not usable) 
-		<input type="checkbox" id="MajorSystems2" name="Natural disaster(House/centre evacuated and not usable)" value="Yes" class = hiddenForm>Natural disaster(House/centre evacuated and not usable)
-		<input type="checkbox" id="MajorSystems3" name="Substantial damage to property(House/centre evacuated and not usable)" value="Yes" class = hiddenForm>Substantial damage to property(House/centre evacuated and not usable)
-		<input type="checkbox" id="MajorSystems4" name="Major utilities supply disruption to House/Centre/Region(House/centre evacuated and not usable)" value="Yes" class = hiddenForm>Major utilities supply disruption to House/Centre/Region(House/centre evacuated and not usable)
-	</label>
+	<div id ="divMajorSystem" name = "Major Systems Affected" class = "hiddenText">
+	Major systems Affected?
+	<br>
+		<input type="checkbox" id="MajorSystems1" name="Fire(House/centre evacuated and not usable)" value="Yes"> 
+			<label for="MajorSystem1Checkbox">Fire(House/centre evacuated and not usable)</label><br>
+		<input type="checkbox" id="MajorSystems2" name="Natural disaster(House/centre evacuated and not usable)" value="Yes">
+			<label for="MajorSystem2Checkbox">Natural disaster(House/centre evacuated and not usable)</label><br>
+		<input type="checkbox" id="MajorSystems3" name="Substantial damage to property(House/centre evacuated and not usable)" value="Yes">
+			<label for="MajorSystem3Checkbox">Substantial damage to property(House/centre evacuated and not usable)</label><br>
+		<input type="checkbox" id="MajorSystems4" name="Major utilities supply disruption to House/Centre/Region(House/centre evacuated and not usable)" value="Yes">
+			<label for="MajorSystem4Checkbox">Major utilities supply disruption to House/Centre/Region(House/centre evacuated and not usable)</label><br>
+	</div>
 	
 	<p id ="textMedicationProblem" class = hiddenText>Medication Problem?</p>
 	<select id = "IncidentMedication" name = "Medication Problem" class = hiddenForm disabled = true onchange=DynamicFuncL2(this.options[this.selectedIndex].value)>
@@ -529,6 +556,7 @@ function restraintDynamicFunc(changedElement,value){
 		<option value="Errors of prescribing and dispensing">Errors of prescribing and dispensing</option>
 		<option value="Medication not provided by family">Medication not provided by family</option>
 		<option value="Refusal of medication">Refusal of medication</option>
+		<optgroup label="" hidden disabled></optgroup>
 	</select>
 		
 	<p id ="textAdministrationErrorType" class = hiddenText>What form of error in administration?</p>	
@@ -539,6 +567,7 @@ function restraintDynamicFunc(changedElement,value){
 		<option value="Wrong dose">Wrong dose</option>
 		<option value="Wrong time">Wrong time</option>
 		<option value="Wrong route">Wrong route</option>
+		<optgroup label="" hidden disabled></optgroup>
 	</select>	
 
 
@@ -546,6 +575,7 @@ function restraintDynamicFunc(changedElement,value){
 		<option value="Please Choose" selected disabled hidden>Please Choose</option>
 		<option value="One Person(severe)">One person(severe)</option>
 		<option value="More than two people with signs/symptoms">More than two people with signs/symptoms</option>
+		<optgroup label="" hidden disabled></optgroup>
 	</select>
 
 <p id ="textSeizureType" name= "Type of seizure"class = hiddenText>Type of seizure?</p>	
@@ -558,6 +588,7 @@ function restraintDynamicFunc(changedElement,value){
 		<option value="Myoclonic">Myoclonic</option>
 		<option value="Simple Partial">Simple Partial</option>
 		<option value="Complex Partial">Complex Partial</option>
+		<optgroup label="" hidden disabled></optgroup>
 	</select>
 
 	<p id ="textSeizureDuration" name = "Seizure duration" class = hiddenText>Seizure duration</p>
@@ -574,6 +605,7 @@ function restraintDynamicFunc(changedElement,value){
 		<option value="4 - 5 minutes">4 - 5 minutes</option>
 		<option value="5 - 10 minutes">5 - 10 minutes</option>
 		<option value="More than 10 minutes">More than 10 minutes</option>
+		<optgroup label="" hidden disabled></optgroup>
 	</select>
 
 	<p id ="textSeizureTrigger" class = hiddenText>Seizure trigger</p>
@@ -596,6 +628,7 @@ function restraintDynamicFunc(changedElement,value){
 		<option value="Travelling">Travelling</option>
 		<option value="Waking Up">Waking Up</option>
 		<option value="Watching TV">Watching TV</option>
+		<optgroup label="" hidden disabled></optgroup>
 	</select>
 	
 	<p id ="textSeizureRecovery" class = hiddenText>Time to recover from seizure</p>
@@ -607,7 +640,8 @@ function restraintDynamicFunc(changedElement,value){
 		<option value="1 - 2 hours">1 - 2 hours</option>
 		<option value="2 - 3 hours">2 - 3 hours</option>
 		<option value="3 - 4 hours">3 - 4 hours</option>
-		<option value="Greater than 4 hours">Greater than 4 hours</option>	
+		<option value="Greater than 4 hours">Greater than 4 hours</option>
+		<optgroup label="" hidden disabled></optgroup>		
 	</select>
 	
 	<p id ="textSeizureInjury" class = hiddenText>Was there any injury?</p>
@@ -615,6 +649,7 @@ function restraintDynamicFunc(changedElement,value){
 		<option value="Please Choose" selected disabled hidden>Please Choose</option>
 		<option value="Yes">Yes</option>
 		<option value="No">No</option>
+		<optgroup label="" hidden disabled></optgroup>
 	</select>
 
 	<p id ="textPainDiscomYesNo" class = hiddenText>Was there any injury?</p>
@@ -622,6 +657,7 @@ function restraintDynamicFunc(changedElement,value){
 		<option value="Please Choose" selected disabled hidden>Please Choose</option>
 		<option value="Yes">Yes</option>
 		<option value="No">No</option>
+		<optgroup label="" hidden disabled></optgroup>
 	</select>
 		
 	<p id ="textDiabetesBSL" class = hiddenText>Blood sugar level</p>
@@ -629,6 +665,7 @@ function restraintDynamicFunc(changedElement,value){
 		<option value="Please Choose" selected disabled hidden>Please Choose</option>
 		<option value="Blood sugar level above normal range(High)">Blood sugar level above normal range(High)</option>
 		<option value="Blood sugar level below normal range(Low)">Blood sugar level below normal range(Low)</option>
+		<optgroup label="" hidden disabled></optgroup>
 	</select>
 	
 	<p id ="textDiabetesTreatment" class = hiddenText>Treatment for Diabetes</p>
@@ -636,12 +673,13 @@ function restraintDynamicFunc(changedElement,value){
 		<option value="Please Choose" selected disabled hidden>Please Choose</option>
 		<option value="Nil">Nil</option>
 		<option value="Administration of items from care plan(e.g. food, liquids, exercise)">Administration of items from care plan(e.g. food, liquids, exercise)</option>
+		<optgroup label="" hidden disabled></optgroup>
 	</select>
 	
 	<!--BEHAVIOUR-->
 	
 	<p id = "textBehaviourWhatHappened" class = "hiddenText">What Happened</p>
-	<select id = "BehaviourWhatHappened" name="What Happened" hidden class=hiddenForm onchange=DynamicFuncL1(this.options[this.selectedIndex].value,this.id)>
+	<select id = "BehaviourWhatHappened" required name="What Happened" hidden class=hiddenForm onchange=DynamicFuncL1(this.options[this.selectedIndex].value,this.id)>
 		<option value="Please Choose" selected disabled hidden>Please Choose</option>
 		<option value="Upset or agitated">Upset or agitated</option>
 		<option value="Verbal abuse">Verbal abuse</option>
@@ -661,6 +699,7 @@ function restraintDynamicFunc(changedElement,value){
 		<option value="Inappropriate behaviour">Inappropriate behaviour</option>
 		<option value="Food">Food</option>
 		<option value="Threatening behaviour">Threatening behaviour</option>
+		<optgroup label="" hidden disabled></optgroup>
 	</select>
 	
 	<p id = "textBehaviourDetails" class = "hiddenText">In what regard?</p>
@@ -671,6 +710,7 @@ function restraintDynamicFunc(changedElement,value){
 		<option value="Pacing, inability to be still">Pacing, inability to be still</option>
 		<option value="Screaming/Yelling, making loud noises">Screaming/Yelling, making loud noises</option>
 		<option value="Tense facial expression/body language">Tense facial expression/body language</option>
+		<optgroup label="" hidden disabled></optgroup>
 	</select>
 
 	<select id = "BehaviourVerbal"class = "hiddenForm">
@@ -678,6 +718,7 @@ function restraintDynamicFunc(changedElement,value){
 		<option value="Personal insults at others">Personal insults at others</option>
 		<option value="Swearing, foul language">Swearing, foul language</option>
 		<option value="Violent threats towards self or others">Violent threats towards self or others</option>
+		<optgroup label="" hidden disabled></optgroup>
 	</select>
 
 	<select id = "BehaviourPhysicalAgainstObject"class = "hiddenForm">
@@ -685,8 +726,8 @@ function restraintDynamicFunc(changedElement,value){
 		<option value="Slams doors, scatters object, makes a mess">Slams doors, scatters object, makes a mess</option>
 		<option value="Throws objects dangerously, punches/kicks furniture or walls">Throws objects dangerously, punches/kicks furniture or walls</option>
 		<option value="Break objects smashes windows">Breaks objects, smashes windows</option>
+		<optgroup label="" hidden disabled></optgroup>
 	</select>
-
 <!--Show if Physical Aggression against self is selected -->
 	<select id = "BehaviourPhysicalAgainstSelf"class = "hiddenForm">
 		<option value="Please Choose" selected disabled hidden>Please Choose</option>
@@ -694,6 +735,7 @@ function restraintDynamicFunc(changedElement,value){
 		<option value="Causes serious injury to self">Causes serious injury to self</option>
 		<option value="Inflicts superficial cuts of bruises, minor burns etc">Inflicts superficial cuts or bruises, minor burns etc</option>
 		<option value="Picks, scratches skin, pulls hair, hits, bites self">Picks, scratches skin, pulls hair, hits, bites self</option>
+		<optgroup label="" hidden disabled></optgroup>
 	</select>
 
 	<!--Show if Physical Aggression against others is selected -->
@@ -702,7 +744,7 @@ function restraintDynamicFunc(changedElement,value){
 		<option value="Bruises, causes sprains,welts etc to others">Bruises, causes sprains, welts etc to others</option>
 		<option value="Strikes, kicks, punches, pulls hair, bites, pushes">Strikes, kicks, punches, pulls hair, bites, pushes</option>
 		<option value="Swings grabs at people, clear threatening gestures">Swings, grabs at people, clear threatening gestures</option>
-
+		<optgroup label="" hidden disabled></optgroup>
 	</select>
 
 	<!--Show if Food is selected -->
@@ -710,6 +752,7 @@ function restraintDynamicFunc(changedElement,value){
 		<option value="Please Choose" selected disabled hidden>Please Choose</option>
 		<option value="Food obsessive">Food Obsessive</option>
 		<option value="Prader Willi Syndrome">Prader Willi Syndrome</option>
+		<optgroup label="" hidden disabled></optgroup>
 	</select>
 
 	<p id ="textWhatHappenedComment" class = hiddenText>Comment on what happened</p>
@@ -720,6 +763,7 @@ function restraintDynamicFunc(changedElement,value){
 		<option value="Please Choose" selected disabled hidden>Please Choose</option>
 		<option value="Yes">Yes</option>
 		<option value="No">No</option>
+		<optgroup label="" hidden disabled></optgroup>
 	</select>
 	
 	<p id ="textBehavStaffResponse" class = hiddenText>Staff Response</p>
@@ -742,6 +786,7 @@ function restraintDynamicFunc(changedElement,value){
 		<option value="Police involvement">Police involvement</option>
 		<option value="PRN">PRN</option>
 		<option value="Other">Other</option>
+		<optgroup label="" hidden disabled></optgroup>
 	</select>
 	
 	<!--Restraint SECTION -->
@@ -750,6 +795,7 @@ function restraintDynamicFunc(changedElement,value){
 		<option value="Please Choose" selected hidden disabled>Please Choose</option>
 		<option value="Yes">Yes</option>
 		<option value="No">No</option>
+		<optgroup label="" hidden disabled></optgroup>
 	</select>
 	<p id ="textRestraintDesiredOutcome"  class = "hiddenText">What was the desired outcome of the restraint?</p>
 	<input type="text" id ="RestraintDesiredOutcome" name="Desired Outcome of Restraint" disabled class = "hiddenForm">
@@ -778,6 +824,7 @@ function restraintDynamicFunc(changedElement,value){
 		<option value ="4-5 minutes">4-5 minutes</option>
 		<option value ="5-10 minutes">5-10 minutes</option>
 		<option value ="more than 10 minutes">more than 10 minutes</option>
+		<optgroup label="" hidden disabled></optgroup>
 	</select>
 	
 	<p id = "textRestraintOnePersonVehicleComments" class = "hiddenText">Comments on restraint one person(in vehicle)</p>
@@ -796,6 +843,7 @@ function restraintDynamicFunc(changedElement,value){
 		<option value ="4-5 minutes">4-5 minutes</option>
 		<option value ="5-10 minutes">5-10 minutes</option>
 		<option value ="more than 10 minutes">more than 10 minutes</option>
+		<optgroup label="" hidden disabled></optgroup>
 	</select>
 	
 	<p id = "textRestraintOnePersonEscortComments" class = "hiddenText">Comments on restraint one person escort</p>
@@ -815,6 +863,7 @@ function restraintDynamicFunc(changedElement,value){
 		<option value ="4-5 minutes">4-5 minutes</option>
 		<option value ="5-10 minutes">5-10 minutes</option>
 		<option value ="more than 10 minutes">more than 10 minutes</option>
+		<optgroup label="" hidden disabled></optgroup>
 	</select>
 	
 	<p id = "textRestraintOnePersonSittingComments" class = "hiddenText">Comments on restraint one person sitting</p>
@@ -834,6 +883,7 @@ function restraintDynamicFunc(changedElement,value){
 		<option value ="4-5 minutes">4-5 minutes</option>
 		<option value ="5-10 minutes">5-10 minutes</option>
 		<option value ="more than 10 minutes">more than 10 minutes</option>
+		<optgroup label="" hidden disabled></optgroup>
 	</select>
 	
 		<p id = "textRestraintTwoPersonEscortComments" class = "hiddenText">Comments on restraint two person escort</p>
@@ -853,6 +903,7 @@ function restraintDynamicFunc(changedElement,value){
 		<option value ="4-5 minutes">4-5 minutes</option>
 		<option value ="5-10 minutes">5-10 minutes</option>
 		<option value ="more than 10 minutes">more than 10 minutes</option>
+		<optgroup label="" hidden disabled></optgroup>
 	</select>
 	
 	<p id = "textRestraintTwoPersonSittingComments" class = "hiddenText">Comments on restraint two person sitting</p>
@@ -869,6 +920,7 @@ function restraintDynamicFunc(changedElement,value){
 		<option value ="Please Choose" selected hidden disabled>Please Choose</option>
 		<option value ="Yes">Yes</option>
 		<option value ="No">No</option>
+		<optgroup label="" hidden disabled></optgroup>
 	</select>	
 	
 	<p id = "textRestraintSupportDetails" class = "hiddenText">Details</p>
@@ -879,6 +931,7 @@ function restraintDynamicFunc(changedElement,value){
 		<option value ="Please Choose" selected hidden disabled>Please Choose</option>
 		<option value ="Yes">Yes</option>
 		<option value ="No">No</option>
+		<optgroup label="" hidden disabled></optgroup>
 	</select>	
 
 
@@ -909,6 +962,7 @@ function restraintDynamicFunc(changedElement,value){
 		<option value="Redness of skin(rash)">Redness of skin(rash)</option>		
 		<option value="Sprain or strain">Sprain or Strain</option>
 		<option value="Superficial injury(e.g. grazing)">Superficial injury (e.g. grazing)</option>
+		<optgroup label="" hidden disabled></optgroup>
 	</select>
 		
 	<p id ="textPartAffected" class = hiddenText>What body part was affected?</p>	
@@ -945,6 +999,7 @@ function restraintDynamicFunc(changedElement,value){
 		<option value="Thumb">Thumb</option>		
 		<option value="Toes">Toe/s</option>
 		<option value="Wrist">Wrist</option>
+		<optgroup label="" hidden disabled></optgroup>
 	</select>
 	
 	<p id ="textSideOfBody" class = hiddenText>What side of the body was affected?</p>
@@ -954,6 +1009,7 @@ function restraintDynamicFunc(changedElement,value){
 		<option value="Right">Right</option>
 		<option value="Left and Right">Left and Right</option>
 		<option value="Not Applicable">Not Applicable</option>
+		<optgroup label="" hidden disabled></optgroup>
 	</select>	
 		
 	<p id ="textTreatment" class = hiddenText>Treatment</p>
@@ -968,6 +1024,7 @@ function restraintDynamicFunc(changedElement,value){
 		<option value="A&E">A&E</option>
 		<option value="Hospitalisation">Hospitalisation</option>
 		<option value="PRN">PRN</option>
+		<optgroup label="" hidden disabled></optgroup>
 	</select>	
 
 	<p id ="textAdmissionDate" class = hiddenText>Admission Date?</p>
@@ -1000,6 +1057,7 @@ function restraintDynamicFunc(changedElement,value){
 		<option value="Police involvement">Police involvement</option>
 		<option value="PRN">PRN</option>
 		<option value="Other">Other</option>
+		<optgroup label="" hidden disabled></optgroup>
 	</select>
 
 	
@@ -1014,9 +1072,12 @@ function restraintDynamicFunc(changedElement,value){
 		<option value="Please Choose" selected disabled hidden>Please Choose</option>
 		<option value="Yes">Yes</option>
 		<option value="No">No</option>
+		<optgroup label="" hidden disabled></optgroup>
 	</select>
 	
 	<br>
+	<br>
+
 	<input type="submit">
 
 </form>
