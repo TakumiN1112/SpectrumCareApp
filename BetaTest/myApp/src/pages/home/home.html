@@ -1,0 +1,25 @@
+<ion-header class="header">
+  <ion-navbar hideBackButton = "true" class="navbar">
+    <ion-title class="title">
+      My Spectrum
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="padding">
+  <div>
+    <button ion-button block color='secondary' large (click)='goWelcome()'>Welcome</button>
+  </div>
+  <div>
+		<button ion-button block color='secondary' large (click)='goEvent()'>Report Event</button>
+	</div>
+	<div>
+		<button ion-button block color='secondary' large (click)='goSop()'>View SOPs</button>
+	</div>
+	<div>
+		<button ion-button block color='#F9E79F' large (click)='goSetting()'>Setting</button>
+	</div>
+	<div>
+		<button ion-button block color='secondary' large >Logout</button>
+	</div>
+</ion-content>

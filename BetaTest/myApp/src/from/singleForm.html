@@ -1,0 +1,171 @@
+<html>
+<style>
+
+<!--	.hiddenForm{
+		display: none;
+		margin-top: 0em;
+		margin-bottom: 0.0em;
+	}
+
+	.hiddenText{
+		display: none;
+		margin-top: 0.5em;
+		margin-bottom:0.5em;
+	}
+	.labelText{
+		display: block;
+		margin-top: 0.5em;
+		margin-bottom:0.5em;
+	}
+	
+	-->
+</style>
+<script>
+
+
+
+
+</script>
+<head>
+<title>
+Title
+</title>
+</head>
+<body>
+<form name="General" action = "PHPtest.php">
+	<select name="IAB">
+			<option>Please Choose</option>
+			<option value = "Incident">Incident</option>
+			<option value="Accident">Accident</option>
+			<option value="Behaviour">Behaviour</option>
+	</select>
+
+	<!- ignored autopop fields to avoid clutter, this file is mostly just a collection of transcribed data-></form>
+	
+
+<form name = "BehaviourForm"  action = "PHPtest.php"  method="post">
+		<p id="BehaviourWhatHappText"  Text">What Happened?</p>
+		
+		<select name = "BehaviourWhatHappened">
+			<option>Please Choose</option>
+			<option value = "Upset">Upset or Agitated</option>
+			<option value = "Verbal">Verbal abuse</option>
+			<option value = "PhysicalAgainstObjects">Physical aggression against objects</option>
+			<option value = "PhysicalAgainstSelf">Physical aggression against self</option>
+			<option value = "PhysicalAgainstOthers">Physical aggression against others </option>
+			<option>Sexual assault - Police Involved</option>
+			<option>Inappropriate sexual behaviour(Including verbalisation)</option>
+			<option>Stripping</option>
+			<option>Near miss or attempt</option>
+			<option>Disturbance to and from members of public</option>
+			<option>Away from Setting(absconding)</option>
+			<option>Inappropriate urination/defecation</option>
+			<option>Insomnia</option>
+			<option>Fecal/body fluid smearing</option>
+			<option>Weapon Used</option>
+			<option>Inappropriate Behaviour</option>
+			<option value = "Food">Food</option>
+			<option>Threatening Behaviour</option>
+		</select>
+
+		<p id = "BehaviourDetailsText">In what regard?</p>
+		<select name = "BehaviourUpset">
+			<option>Please Choose</option>
+			<option>Crying/Venting</option>
+			<option>Hand Wringing</option>
+			<option>Pacing, inability to be still</option>
+			<option>Screaming/Yelling, making loud noises</option>
+			<option>Tense facial expression/body language</option>
+		</select>
+		
+
+		<select name = "BehaviourPhysicalAgainstObject" Form">
+			In what regard?
+			<option>Please Choose</option>
+			<option>Slams doors, scatters object, makes a mess</option>
+			<option>Throws objects dangerously, punches/kicks furniture or walls</option>
+			<option>Breaks objects, smashes windows</option>
+		</select>
+
+	<!-Show if Physical Aggression against self is selected ->
+		<select name = "BehaviourPhysicalAgainstSelf" Form">
+			In what regard?
+			<option>Please Choose</option>
+			<option>Bangs head, Hits fists onto objects, Throws self(Uninjured)</option>
+			<option>Causes serious injury to self</option>
+			<option>Inflicts superficial cuts or bruises, minor burns etc</option>
+			<option>Picks, Scratches skin, pulls hair, hits, bites self</option>
+		</select>
+
+		<!-Show if Physical Aggression against others is selected ->
+		<select name = "BehaviourPhysicalAgainstOther" Form">
+			In what regard?
+			<option>Please Choose</option>
+			<option>Bruises, causes sprains, welts etc to others</option>
+			<option>Strikes, kicks, punches, pulls hair, bites, pushes</option>
+			<option>Swings, grabs at people, clear threatening gestures</option>
+
+		</select>
+
+		<!-Show if Food is selected ->
+		<select name = "BehaviourFood" Form">
+			In what regard?
+			<option>Please Choose</option>
+			<option>Food Obsessive</option>
+			<option>Prader Willi Syndrome</option>
+		</select>
+		
+		<p class = "labelText">Comments in regards to event:</p>
+		<input type="text" id="BehaviourHappenComments">
+
+		
+		<!-STAFF RESPONSE SECTION ->
+
+
+		<p class = "labelText">Staff Response:<p>
+
+		<select name = "staffResponse">
+			<option>Called for assistance</option>
+			<option>Interruption/blocking</option>
+			<option>Nothing/Planned ignoring</option>
+			<option>Physical discomfort relieved</option>
+			<option>Continued Activity</option>
+			<option>Task/Activity Removed</option>
+			<option>Given item/Activity person wanted</option>
+			<option>given item, activity or attention (neutral)</option>
+			<option>Verbal redirection to activity</option>
+			<option>Physical redirection to activity(with gentle physical guidance)</option>
+			<option>Redirection to a different area(not forced)</option>
+			<option>Removal of other service users from the area(not forced)</option>
+			<option value = "Restraint">Physical restraint</option>
+			<option>Police involvement</option>
+			<option value= "PRN">PRN</option>
+			<option>Other</option>
+		</select>
+		
+		<p id="BehaviourPRNText"  Text">PRN Name/Dose<p>
+		<input type="text" id = "BehaviourPRN"  Form">
+
+
+		<p id ="RestraintBSPText" Text">Does the person have BSP?</p>
+		<input id="RestraintBSPRadio1"  Form" type="radio" name ="RestraintBSP" value = "Yes"><span id ="BSPYes"  Text">Yes</span><br>
+		<input id="RestraintBSPRadio2"  Form" type="radio" name ="RestraintBSP" value = "No"><span id = "BSPNo"  Text">No</span><br>
+		
+		<p id ="RestraintDesiredOutcome"   Text">What was the desired outcome of the restraint?</p>
+		<input type="text" id="RestraintOutcomeComments"  Form">
+		<p  id = "RestraintAlternatives"  Text">What alternative interventions were attempted before Restraint?</p>
+		<input type="text" id="RestraintAlternativesComments"  Form">
+		
+		<p id = "RestraintTypesText" Text">Type of Restraint/s used?</p>
+
+			
+	</form>
+
+	<input type="submit" name="submit">
+</form>
+	
+
+
+
+</body>
+</html>

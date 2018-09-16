@@ -1,0 +1,569 @@
+<!DOCTYPE HTML>
+<html>
+<style>
+
+	.hiddenForm{
+		display: none;
+		margin-top: 0em;
+		margin-bottom: 0.0em;
+		disabled = true;
+	}
+
+
+	.hiddenText{
+		display: none;
+		margin-top: 0.5em;
+		margin-bottom:0.5em;
+	}
+	.labelText{
+		display: block;
+		margin-top: 0.5em;
+		margin-bottom:0.5em;
+	}
+	.hiddenBreak{
+		display: none;
+	}
+	
+</style>
+<script>
+
+function collapseElements(elementArray){
+	var itt = 0;
+	
+	for(itt = 0; itt < elementArray.length; ++itt){	
+		console.log("remove " + elementArray[itt]);
+		document.getElementById(elementArray[itt]).selectedIndex = 0;
+		
+		if(document.getElementById(elementArray[itt]).onchange != null){
+			document.getElementById(elementArray[itt]).onchange();
+		}
+
+		document.getElementById(elementArray[itt]).disabled = true;
+		document.getElementById(elementArray[itt]).style.display= "none";
+	}	
+}
+
+function displayNext(elementArray){
+	var itt = 0;
+	
+	for(itt = 0; itt < elementArray.length; ++itt){
+		console.log("add " + elementArray[itt]);
+		document.getElementById(elementArray[itt]).disabled = false;
+		document.getElementById(elementArray[itt]).style.display = "block";	
+	}
+}
+
+function IABGeneralFunc(value){
+// Function creates red group 
+	//collapse Incident
+
+	collapseElements(["IncidentWhatHappened","textWhatHappened","Treatment","textTreatment","StaffResponse","textStaffResponse", "OtherInfo", "textOtherInfo", "CoordContactedYesNo", "textCoordContacted"]);
+	//collapseAccident
+	//CollapseBehaviour
+	
+
+
+	if(value == "Incident"){	
+		displayNext(["IncidentWhatHappened","textWhatHappened","Treatment","textTreatment","StaffResponse","textStaffResponse", "OtherInfo", "textOtherInfo", "CoordContactedYesNo", "textCoordContacted"]);
+	}
+	else if(value == "Accident"){
+	//	displayNext([]);
+	}
+	else if(value == "Behaviour"){
+
+	}
+	
+}
+
+function DynamicFuncL1(value){
+	//function Creates orange group based on red group selections
+	
+	collapseElements(["textIncInjury","AbuseInjuryYesNo","FinancialAmount", "textFinancialAmount","NatureOfInjury","textNatureOfInjury","PartAffected","textPartAffected","SideOfBody","textSideOfBody","textCommunityAgencies","FireServiceCheckbox","PoliceCheckbox", "AmbulanceCheckbox","textSpectrumCareDepartments", "ServiceDeliveryCheckbox", "HomesofChoiceCheckbox", "QualityandRiskCheckbox", "HRCheckbox", "textMajorSystem", "MajorSystems1", "MajorSystems2", "MajorSystems3", "MajorSystems4","IncidentMedical", "textIncidentMedical", "IncidentMedication", "textMedicationProblem","AdmissionTime", "textAdmissionTime", "AdmissionDate", "textAdmissionDate", "DischargeTime", "textDischargeTime", "textPRN","PRN"]);
+//INCIDENT
+	//What Happened
+	if(value == "Assault, Abuse or Neglect"){
+		displayNext(["textIncInjury","AbuseInjuryYesNo"]);
+	}
+	else if(value == "Financial"){
+		displayNext(["FinancialAmount", "textFinancialAmount"]);
+	}
+	else if(value == "injury as a result of someone's behaviour" ){
+		displayNext(["NatureOfInjury","textNatureOfInjury","PartAffected","textPartAffected","SideOfBody","textSideOfBody"]);
+	}
+	else if(value == "Major event involving multiple community agencies or Spectrum Care departments"){
+		displayNext(["textCommunityAgencies","FireServiceCheckbox","PoliceCheckbox", "AmbulanceCheckbox","textSpectrumCareDepartments", "ServiceDeliveryCheckbox", "HomesofChoiceCheckbox", "QualityandRiskCheckbox", "HRCheckbox"]);
+	}
+	else if(value == "Major systems failure"){
+		displayNext(["textMajorSystem", "MajorSystems1", "MajorSystems2", "MajorSystems3", "MajorSystems4"]);
+	
+	}
+	else if(value == "Medical"){
+		displayNext(["IncidentMedical", "textIncidentMedical"]);
+	}
+	else if(value == "Medication"){
+		displayNext(["IncidentMedication", "textMedicationProblem"])
+	}
+	
+	//Treatment
+	if(value == "Hospitalisation"){
+		displayNext(["AdmissionTime", "textAdmissionTime", "AdmissionDate", "textAdmissionDate", "DischargeTime", "textDischargeTime"]);
+	}
+	else if(value == "PRN"){
+		displayNext(["textPRN,PRN"]);
+	}
+	
+//ACCIDENT
+//BEHAVIOUR
+}
+function DynamicFuncL2(value){
+//function creates yellow group based on orange group selections
+	//Separate due to the Accident section being Multilevelled
+	if(document.getElementById("IncidentWhatHappened").options[document.getElementById("IncidentWhatHappened").selectedIndex].value != "injury as a result of someone's behaviour"){
+		collapseElements(["NatureOfInjury","textNatureOfInjury","PartAffected","textPartAffected","SideOfBody","textSideOfBody"]);
+	}
+	//all other elements
+	collapseElements(["textAdministrationErrorType","AdministrationErrorType", "ChokingHarm", "textChokingHarm","SeizureType", "textSeizureType", "SeizureDuration", "textSeizureDuration", "SeizureTrigger", "textSeizureTrigger", "SeizureRecovery", "textSeizureRecovery", "SeizureInjury", "textSeizureInjury", "DiabetesBSL", "textDiabetesBSL", "DiabetesTreatment", "textDiabetesTreatment","PainDiscomYesNo", "textPainDiscomYesNo","DiabetesBSL", "textDiabetesBSL", "DiabetesTreatment", "textDiabetesTreatment"]);
+
+//INCIDENT
+	//medication
+	if(value == "Errors of administration"){
+		displayNext(["textAdministrationErrorType","AdministrationErrorType"]);
+	}
+	//injury
+	if(document.getElementById("IncidentWhatHappened").options[document.getElementById("IncidentWhatHappened").selectedIndex].value == "Assault, Abuse or Neglect" &&
+		value == "Yes"){
+		displayNext(["NatureOfInjury","textNatureOfInjury","PartAffected","textPartAffected","SideOfBody","textSideOfBody"]);
+	}
+	
+	//medical
+	if(value == "Choking"){
+		displayNext(["ChokingHarm", "textChokingHarm"]);
+	}
+	else if(value == "Diabetes"){
+		displayNext(["DiabetesBSL", "textDiabetesBSL", "DiabetesTreatment", "textDiabetesTreatment"]);
+	}
+	else if(value == "Pain or discomfort" || value == "Poisoning and toxic effects" || value == "Surgery-acute not booked"){
+		displayNext(["PainDiscomYesNo", "textPainDiscomYesNo"])
+	}
+	else if(value == "Serious harm injury" || value == "skin and soft tissue pressure injury" || value == "Unknown/Unwitnessed injury"){
+		displayNext(["NatureOfInjury","textNatureOfInjury","PartAffected","textPartAffected","SideOfBody","textSideOfBody"]);
+
+	}
+	else if(value == "Influenza"){
+	}
+	else if(value == "Vomiting/Diarrhoea"){
+	}
+	else if(value == "Lower respiratory tract infection"){
+	}
+	else if(value == "Skin and soft tissue infestation"){
+	}
+	else if(value == "Skin and soft tissue infection"){
+	}
+	else if(value == "Seizure"){
+		displayNext(["SeizureType", "textSeizureType", "SeizureDuration", "textSeizureDuration", "SeizureTrigger", "textSeizureTrigger", "SeizureRecovery", "textSeizureRecovery", "SeizureInjury", "textSeizureInjury"]);
+	}
+//ACCIDENT
+//BEHAVIOUR	
+	
+	
+}
+function DynamicFuncL3(value){
+//function creates green group based on yellow group selections	
+	//Separate due to the Accident section being Multilevelled
+	if(document.getElementById("IncidentWhatHappened").options[document.getElementById("IncidentWhatHappened").selectedIndex].value != "injury as a result of someone's behaviour" &&
+	document.getElementById("AbuseInjuryYesNo").options[document.getElementById("AbuseInjuryYesNo").selectedIndex].value != "Yes"
+	){
+		collapseElements(["NatureOfInjury","textNatureOfInjury","PartAffected","textPartAffected","SideOfBody","textSideOfBody"]);
+	}
+	
+//INCIDENT
+	//seizure and Pain/discomfort
+	if(value == "Yes"){
+		displayNext(["NatureOfInjury","textNatureOfInjury","PartAffected","textPartAffected","SideOfBody","textSideOfBody"]);
+
+	}
+
+
+//ACCIDENT
+//BEHAVIOUR		
+}
+
+function DynamicFuncL4(value){
+//function creates blue group based on green group selections
+//PRobably Delete
+}
+	
+	
+</script>
+<head>
+<title>
+Title
+</title>
+</head>
+<body>
+
+
+
+<!-- give all input sections a short ID and a name, which will be used for the message in the PHP script-->
+<form id ="formMain" name = "formMain" action="PHPtest.php" method="post" >
+<p class = labelText>Type of Event</p>	
+
+<select id ="IABGeneral" name="Event Type" onchange =IABGeneralFunc(this.options[this.selectedIndex].value)>
+		<option value="Please Choose">Please Choose</option>
+		<option value = "Incident">Incident</option>
+		<option value="Accident">Accident</option>
+		<option value="Behaviour">Behaviour</option>
+	</select>
+	
+	
+<!-- INCIDENT -->
+
+<p id ="textWhatHappened" class = hiddenText>What Happened</p>
+	<select id = "IncidentWhatHappened" name="What Happened" class = hiddenForm disabled = true onchange=DynamicFuncL1(this.options[this.selectedIndex].value)>
+		<option value="Please Choose">Please Choose</option>
+		<option value="Assault, Abuse or Neglect">Assault, Abuse or Neglect</option>
+		<option value="Death(unexpected)">Death(unexpected)</option>
+		<option value="Financial">Financial</option>
+		<option value="injury as a result of someone's behaviour">injury as a result of someone's behaviour</option>
+		<option value="Major event involving multiple community agencies or Spectrum Care departments">Major event involving multiple community agencies or Spectrum Care departments</option>
+		<option value="Major systems failure">Major Systems Failure</option>
+		<option value="Medical">Medical</option>
+		<option value="Medication">Medication</option>
+		<option value="Near miss">Near Miss</option>
+		<option value="Property damage">Property Damage</option>
+		<option value="Tools/Appliances">Tools/Appliances</option>
+	</select>
+
+	<!--Orange Group -->
+	<p id ="textIncidentMedical" name = "Medical Problem" class = hiddenText>Medical Problem</p>
+	<select id = "IncidentMedical" name = "Medical Problem" disabled = true class = hiddenForm onchange=DynamicFuncL2(this.options[this.selectedIndex].value)>
+		<option value="Please Choose">Please Choose</option>
+		<option value="Asthma">Asthma</option>
+		<option value="Bladder Infection (and indwelling catheter)">Bladder infection(and indwelling catheter)</option>
+		<option value="Bowel motion signs of blood present">Bowel motion signs of blood present</option>
+		<option value="Choking">Choking</option>
+		<option value="Constipation">Constipation</option>
+		<option value="Diabetes">Diabetes</option>
+		<option value="Influenza">Influenza</option>
+		<option value="Lower respiratory tract infection">Lower respiratory tract infection</option>
+		<option value="Pain or discomfort">Pain or discomfort</option>
+		<option value="Poisoning and toxic effects">Poisoning and toxic effects</option>
+		<option value="Seizure">Seizure</option>
+		<option value="Serious harm injury">Serious harm injury</option>
+		<option value="Skin and soft tissue infection">Skin and soft tissue infection</option>
+		<option value="Skin and soft tissue infestation">Skin and soft tissue infestation (e.g. scabies, nits)</option>
+		<option value="Skin and soft tissue pressure injury">Skin and soft tissue pressure injury</option>
+		<option value="Sunburn">Sunburn</option>
+		<option value="Surgery-acute not booked">Surgery-acute not booked</option>
+		<option value="Unknown/Unwitnessed injury">Unknown/Unwitnessed injury</option>
+		<option value="Vomiting and has signs of blood present">Vomiting and has signs of blood present</option>
+		<option value="Vomiting/Diarrhoea">Vomiting/Diarrhoea</option>
+	</select>
+	
+	<p id ="textChokingHarm" name = "Harm from choking" class = hiddenText>level of harm?</p>
+	<select id = "ChokingHarm" name="Choking harm" class = hiddenForm>
+		<option value="Please Choose">Please Choose</option>
+		<option value="No harm">No harm</option>
+		<option value="Temporary harm(e.g. scratched throat)">Temporary harm(e.g. scratched throat)</option>
+		<option value="Permanent harm(e.g.Brain damage)">Permanent harm(e.g. Brain damage)</option>
+		<option value="Death">Death</option>
+	</select>
+	
+	<p id ="textIncInjury" class = hiddenText>Was there any injury?</p>
+	<select id = "AbuseInjuryYesNo" name="Was there any injury?" disabled = true class = hiddenForm onchange=DynamicFuncL2(value)>
+		<option value="Please Choose">Please Choose</option>
+		<option value="Yes">Yes</option>
+		<option value="No">No</option>
+	</select>	
+	
+	<p id ="textFinancialAmount" class = hiddenText>Amount Involved?</p>
+	<select id = "FinancialAmount" name ="Amount Involved" disabled = true class = hiddenForm>
+		<option value="Please Choose">Please Choose</option>
+		<option value="Less than $20.00">Less than $20.00</option>
+		<option value="More than $20.00">More than $20.00</option>
+	</select>
+
+	<!-- CHECKBOXES need fixing for formatting-->
+	<label id="textCommunityAgencies" class = hiddenText><br>Community Agencies:
+		<br>
+		<input type="checkbox" id = "FireServiceCheckbox" name = "Fire Service" class = hiddenForm >Fire Service
+		<input type="checkbox" id = "PoliceCheckbox" name = "Police" class = hiddenForm>Police<br>
+		<input type="checkbox" id = "AmbulanceCheckbox" name = "Ambulance" class = hiddenForm>Ambulance<br>
+	</label>
+	<label id="textSpectrumCareDepartments" class = hiddenText>Spectrum Care Departments:
+		<br>
+		<input type="checkbox" id = "ServiceDeliveryCheckbox" name = "Service Delivery" class = hiddenForm>Service Delivery<br>
+		<input type="checkbox" id = "HomesofChoiceCheckbox" name = "Homes of Choice" class = hiddenForm>Homes of Choice<br>
+		<input type="checkbox" id = "QualityandRiskCheckbox" name = "Quality and Risk" class = hiddenForm>Quality and Risk<br>
+		<input type="checkbox" id = "HRCheckbox" name = "HR">HR<br>
+	</label>
+		
+	<label id ="textMajorSystem" name = "Major Systems Affected" class = hiddenText><br>Major systems Affected?
+		<input type="checkbox" id="MajorSystems1" value="Fire(House/centre evacuated and not usable)" class = hiddenForm>Fire(House/centre evacuated and not usable)<br>
+		<input type="checkbox" id="MajorSystems2" value="Natural disaster(House/centre evacuated and not usable)" class = hiddenForm>Natural disaster(House/centre evacuated and not usable)<br>
+		<input type="checkbox" id="MajorSystems3" value= "Substantial damage to property(House/centre evacuated and not usable)" class = hiddenForm>Substantial damage to property(House/centre evacuated and not usable)<br>
+		<input type="checkbox" id="MajorSystems4" value="Major utilities supply disruption to House/Centre/Region(House/centre evacuated and not usable)" class = hiddenForm>Major utilities supply disruption to House/Centre/Region(House/centre evacuated and not usable)<br>
+	</label>
+	
+	<p id ="textMedicationProblem" class = hiddenText>Medication Problem?</p>
+	<select id = "IncidentMedication" name = "Medication Problem" class = hiddenForm onchange=DynamicFuncL2(this.options[this.selectedIndex].value)>
+		<option value="Please Choose">Please Choose</option>
+		<option value="Adverse reaction">Adverse Reaction</option>
+		<option value="Errors of administration">Errors of administration</option>
+		<option value="Errors of prescribing and dispensing">Errors of prescribing and dispensing</option>
+		<option value="Medication not provided by family">Medication not provided by family</option>
+		<option value="Refusal of medication">Refusal of medication</option>
+	</select>
+		
+	<p id ="textAdministrationErrorType" class = hiddenText>What form of error in administration?</p>	
+	<select id = "AdministrationErrorType" name = "Type of error in administration" class = hiddenForm>
+		<option value="Please Choose">Please Choose</option>
+		<option value="Wrong drug">Wrong drug</option>
+		<option value="Wrong person">Wrong person</option>
+		<option value="Wrong dose">Wrong dose</option>
+		<option value="Wrong time">Wrong time</option>
+		<option value="Wrong route">Wrong route</option>
+	</select>	
+
+
+	
+	<select id = "IncidentVomiting/Diarrhoea" name = "People" disabled = true class = hiddenForm>
+		<option value="Please Choose">Please Choose</option>
+		<option value="One Person(severe)">One person(severe)</option>
+		<option value="More than two people with signs/symptoms">More than two people with signs/symptoms</option>
+	</select>
+
+<p id ="textSeizureType" name= "Type of seizure"class = hiddenText>Type of seizure?</p>	
+	<select id = "SeizureType" name = "Type of Seizure" disabled = true class = hiddenForm>
+		<option value="Please Choose">Please Choose</option>
+		<option value="Tonic Clonic">Tonic Clonic</option>
+		<option value="Absence">Absence</option>
+		<option value="Tonic">Tonic</option>
+		<option value="Atonic">Atonic</option>
+		<option value="Myoclonic">Myoclonic</option>
+		<option value="Simple Partial">Simple Partial</option>
+		<option value="Complex Partial">Complex Partial</option>
+	</select>
+
+
+	<p id ="textSeizureDuration" name = "Seizure duration" class = hiddenText>Seizure duration</p>
+	<select id = "SeizureDuration" name = "Duration of Seizure" disabled = true class = hiddenForm>
+		<option value="Please Choose">Please Choose</option>
+		<option value="Less than 5 seconds">Less than 5 seconds</option>
+		<option value="5 - 10 seconds">5 - 10 seconds</option>
+		<option value="10 - 20 seconds">10 - 20 seconds</option>
+		<option value="20 - 40 seconds">20 - 40 seconds</option>
+		<option value="40 - 60 seconds">40 - 60 seconds</option>
+		<option value="1 - 2 minutes">1 - 2 minutes</option>
+		<option value="2 - 3 minutes">2 - 3 minutes</option>
+		<option value="3 - 5 minutes">3 - 4 minutes</option>
+		<option value="4 - 5 minutes">4 - 5 minutes</option>
+		<option value="5 - 10 minutes">5 - 10 minutes</option>
+		<option value="More than 10 minutes">More than 10 minutes</option>
+	</select>
+
+	<p id ="textSeizureTrigger" class = hiddenText>Seizure trigger</p>
+	<select id = "SeizureTrigger" name = "Trigger for Seizure" disabled = true class = hiddenForm>
+		<option value="Please Choose">Please Choose</option>
+		<option value="Activity">Activity</option>
+		<option value="Alcohol">Alcohol</option>
+		<option value="Coffee or Tea">Coffee or Tea</option>
+		<option value="Emotional Stress">Emotional Stress</option>
+		<option value="Environment">Environment</option>
+		<option value="Fever/Illness">Fever/Illness</option>
+		<option value="Fatigue">Fatigue</option>
+		<option value="Late Night">Late Night</option>
+		<option value="Missed Medication">Missed Medication</option>
+		<option value="Missed Meals">Missed Meals</option>
+		<option value="Near Period">Near Period</option>
+		<option value="Overwork">Overwork</option>
+		<option value="Relaxing">Relaxing</option>
+		<option value="Sleeping">Sleeping</option>
+		<option value="Travelling">Travelling</option>
+		<option value="Waking Up">Waking Up</option>
+		<option value="Watching TV">Watching TV</option>
+	</select>
+	
+	<p id ="textSeizureRecovery" class = hiddenText>Time to recover from seizure</p>
+	<select id = "SeizureRecovery" name = "Recovery time" disabled = true class = hiddenForm>
+		<option value="Please Choose">Please Choose</option>
+		<option value="Less than 15 minutes">Less than 15 minutes</option>
+		<option value="15 - 30 minutes">15 - 30 minutes</option>
+		<option value="30 - 60 minutes">30 - 60 minutes</option>
+		<option value="1 - 2 hours">1 - 2 hours</option>
+		<option value="2 - 3 hours">2 - 3 hours</option>
+		<option value="3 - 4 hours">3 - 4 hours</option>
+		<option value="Greater than 4 hours">Greater than 4 hours</option>	
+	</select>
+	
+	<p id ="textSeizureInjury" class = hiddenText>Was there any injury?</p>
+	<select id = "SeizureInjury" name = "Was there any injury" disabled = true class = hiddenForm onchange=DynamicFuncL3(this.options[this.selectedIndex].value)>
+		<option value="Please Choose">Please Choose</option>
+		<option value="Yes">Yes</option>
+		<option value="No">No</option>
+	</select>
+
+	<p id ="textPainDiscomYesNo" class = hiddenText>Was there any injury?</p>
+	<select id = "PainDiscomYesNo" name = "Was there any injury" disabled = true class = hiddenForm onchange=DynamicFuncL3(this.options[this.selectedIndex].value)>
+		<option value="Please Choose">Please Choose</option>
+		<option value="Yes">Yes</option>
+		<option value="No">No</option>
+	</select>
+	
+	<p id ="textNatureOfInjury" class = hiddenText>Nature of injury?</p>
+	<select id = "NatureOfInjury" name = "Nature of Injury" disabled = true class = hiddenForm>
+		<option value="Please Choose">Please Choose</option>
+		<option value="Nil injury">Nil injury</option>
+		<option value="Amputation">Amputation</option>
+		<option value="Broken Teeth">Broken Teeth</option>
+		<option value="Bruising, Crushing or swelling">Bruising, Crushing or swelling</option>
+		<option value="Burns">Burns</option>
+		<option value="Concussion">Concussion</option>
+		<option value="Cuts or Laceration">Cuts or Laceration</option>
+		<option value="Damage to artificial aid">Damage to artificial aid</option>
+		<option value="Dislocation">Dislocation</option>
+		<option value="Foreign body">Foreign body</option>
+		<option value="Fracture of spine">Fracture of spine</option>
+		<option value="Fracture/Broken bone">Fracture/broken bone</option>
+		<option value ="Hair was pulled out">Hair was pulled out</option>
+		<option value="Head injury">Head injury</option>
+		<option value="Hearing loss">Hearing Loss</option>
+		<option value="Internal injury or trunk(torso)">Internal injury of trunk(torso)</option>		
+		<option value="Nerves or spinal cord">Nerves or spinal cord</option>
+		<option value="No visible injuries, but experiencing discomfort">No visible injuries, but experiencing pain or discomfort</option>
+		<option value="Open wound">Open wound</option>
+		<option value="Puncture wound">Puncture Wound</option>
+		<option value="Redness of skin(rash)">Redness of skin(rash)</option>		
+		<option value="Sprain or strain">Sprain or Strain</option>
+		<option value="Superficial injury(e.g. grazing)">Superficial injury (e.g. grazing)</option>
+	</select>
+		
+	<p id ="textPartAffected" class = hiddenText>What body part was affected?</p>	
+	<select id = "PartAffected" name = "Part Affected" disabled = true class=hiddenForm>
+		<option value="Please Choose">Please Choose</option>
+		<option value="Not Applicable">Not Applicable</option>
+		<option value="Abdomen/Stomach">Abdomen/Stomach</option>
+		<option value="Ankle">Ankle</option>
+		<option value="Arm upper">Arm Upper</option>
+		<option value="Arm lower">Arm Lower</option>
+		<option value="Back upper">Back Upper</option>
+		<option value="Back lowe">Back Lower</option>
+		<option value="Bottom">Bottom</option>
+		<option value="Cheek">Cheek</option>
+		<option value="Chest">Chest</option>
+		<option value="Ear">Ear</option>
+		<option value="Elbow">Elbow</option>
+		<option value="Eye">Eye</option>
+		<option value="Face">Face</option>
+		<option value="Finger/s">Finger/s</option>
+		<option value="Foot">Foot</option>		
+		<option value="Genitals">Genitals</option>
+		<option value="Groin">Groin</option>
+		<option value="Hand">Hand</option>
+		<option value="Head">Head</option>
+		<option value="Knee">Knee</option>		
+		<option value="Leg">Leg</option>
+		<option value="Mouth">Mouth</option>
+		<option value="Multiple">Multiple</option>
+		<option value="Neck">Neck</option>		
+		<option value="Nose">Nose</option>
+		<option value="Systemic(internal organs)">Systemic(internal organs)</option>
+		<option value="Teeth">Teeth</option>
+		<option value="Thumb">Thumb</option>		
+		<option value="Toes">Toe/s</option>
+		<option value="Wrist">Wrist</option>
+	</select>
+	
+	<p id ="textSideOfBody" class = hiddenText>What side of the body was affected?</p>
+	<select id = "SideOfBody" name = "Side of body affected" disabled = true class = hiddenForm>
+		<option value="Please Choose">Please Choose</option>
+		<option value="Left">Left</option>
+		<option value="Right">Right</option>
+		<option value="Left and Right">Left and Right</option>
+		<option value="Not Applicable">Not Applicable</option>
+	</select>	
+	
+	
+	<p id ="textDiabetesBSL" class = hiddenText>Blood sugar level</p>
+	<select id = "DiabetesBSL" name = "Blood Sugar Level" disabled = true class = hiddenForm>
+		<option value="Please Choose">Please Choose</option>
+		<option value="Blood sugar level above normal range(High)">Blood sugar level above normal range(High)</option>
+		<option value="Blood sugar level below normal range(Low)">Blood sugar level below normal range(Low)</option>
+	</select>
+	
+	<p id ="textDiabetesTreatment" class = hiddenText>Treatment for Diabetes</p>
+	<select id = "DiabetesTreatment" name = "Treatment for Diabetes" disabled = true class = hiddenForm>
+		<option value="Please Choose">Please Choose</option>
+		<option value="Nil">Nil</option>
+		<option value="Administration of items from care plan(e.g. food, liquids, exercise)">Administration of items from care plan(e.g. food, liquids, exercise)</option>
+	</select>
+	
+	
+	<!-- General ends from here-->
+	
+	<p id ="textTreatment" class = hiddenText>Treatment</p>
+	<select id = "Treatment" name="Treatment" disabled = true class = hiddenForm onchange =DynamicFuncL1(this.options[this.selectedIndex].value)>
+		<option value="Please Choose">Please Choose</option>
+		<option value="Nil treatment">Nil treatment</option>
+		<option value="Counselled/Reassured">Counselled/Reassured</option>
+		<option value="First aid given at home">First aid given at home</option>
+		<option value="G.P.">G.P.</option>
+		<option value="Dentist">Dentist</option>
+		<option value="Phone Ambulance">Phone Ambulance</option>
+		<option value="A&E">A&E</option>
+		<option value="Hospitalisation">Hospitalisation</option>
+		<option value="PRN">PRN</option>
+	</select>	
+
+	<p id ="textAdmissionTime" class = hiddenText>Admission Time?</p>
+	<input type = "text" id ="AdmissionTime" name = "Admission time" class = hiddenForm></input>
+	
+	<p id ="textAdmissionDate" class = hiddenText>Admission Date?</p>
+	<input type = "date" id ="AdmissionDate" class = hiddenForm></input>
+	
+	<p id ="textDischargeTime" class = hiddenText>Discharge Time?</p>
+	<input type = "text" id ="DischargeTime" name = "Discharge time" class = hiddenForm></input>
+	
+	<p id ="textPRN" class = hiddenText>PRN Name/Dosage</p>
+	<input type = "text" id ="PRN" name = "PRN/DOsage" class = hiddenForm></input>
+	
+	
+	<p id ="textStaffResponse" class = hiddenText>Staff Response</p>
+	<select id="StaffResponse" name="Staff response" disabled = true class = hiddenForm>
+		<option value="Please Choose">Please Choose</option>
+		<option value="Called for assistance">Called for assistance</option>
+		<option value="Interruption/blocking">Interruption/blocking</option>
+		<option value="Nothing/Planned ignoring">Nothing/Planned ignoring</option>
+		<option value="Physical discomfort relieved">Physical discomfort relieved</option>
+		<option value="Continued activity">Continued activity</option>
+		<option value="Task/Activity removed">Task/Activity removed</option>
+		<option value="Given item/Activity person wanted">Given item/Activity person wanted</option>
+		<option value="Given item, activity or attention(neutral)">given item, activity or attention (neutral)</option>
+		<option value="Verbal redirection to activity">Verbal redirection to activity</option>
+		<option value="Physical redirection to activity(with gentle physical guidance)">Physical redirection to activity(with gentle physical guidance)</option>
+		<option value="Redirection to a different area(not forced)">Redirection to a different area(not forced)</option>
+		<option value="Removal of other service users from the area(not forced)">Removal of other service users from the area(not forced)</option>
+		<option value = "Physical restraint">Physical restraint</option>
+		<option value="Police involvement">Police involvement</option>
+		<option value= "PRN">PRN</option>
+		<option value="Other">Other</option>
+	</select>
+	
+	<p id ="textOtherInfo" class = hiddenText>Other Information</p>
+	<input type="text" id="OtherInfo" name="Other Information" disabled = true class = hiddenForm></input>
+	
+	<p id ="textCoordContacted" class = hiddenText>Has a Serivce/On-call Coordinator been contacted</p>
+	<select id="CoordContactedYesNo" name="Coordinator Contacted" disabled = true class = hiddenForm>
+		<option value="Please Choose">Please Choose</option>
+		<option value="Yes">Yes</option>
+		<option value="No">No</option>
+	</select>
+	<input type="submit">
+
+</form>
+
+
+
+
+</body>
+</html>

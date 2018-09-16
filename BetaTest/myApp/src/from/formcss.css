@@ -1,0 +1,57 @@
+	.hiddenForm{
+		display: none;
+		margin-top: 0em;
+		margin-bottom: 0.0em;
+		disabled = true;
+	}
+	.hiddenText{
+		display: none;
+		margin-top: 0.5em;
+		margin-bottom:0.5em;
+	}
+	.labelText{
+		display: block;
+		margin-top: 0.5em;
+		margin-bottom:0.5em;
+	}
+	.hiddenBreak{
+		display: none;
+	}
+	
+
+body{
+	background:#0079c2;
+}
+
+#formMain{
+	background:white;
+	width:90%;
+	margin-left:2.5%;
+	margin-right:2.5%;
+	margin-top:2.5%;
+	padding:2.5%;
+	float:left;
+}
+p{
+	font-family:Calibri;
+	font-weight:bold;
+}
+#rtitle{
+	font-family:Calibri;
+	font-size:120%;
+	font-weight:bold;
+}
+#IncidentWhatHappened{
+	width:95%;
+}
+
+#StaffResponse{
+	width:95%;
+}
+
+#NatureOfInjury{
+	width:95%;
+}
+#OtherInfo{
+	width:95%;
+}
